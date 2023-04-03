@@ -1,0 +1,117 @@
+[
+  [
+    {"op" : "remove", "path" : "/config"},
+    {"op" : "replace", "path" : "/scripts", "value" : ["/sys/stardust/quickbar/quickbar.lua"]},
+    {"op" : "replace", "path" : "/gui", "value" : {
+      "panefeature" : {
+        "type" : "panefeature",
+        "anchor" : "topRight",
+        "offset" : [-24, -47],
+        "keyDismissable" : false,
+        "positionLocked" : true
+      },
+      "background" : {
+        "zlevel" : 0,
+        "type" : "background",
+        "fileBody" : "/sys/stardust/quickbar/quickbar.bg.png"
+      },
+      "scroll" : {
+        "type" : "scrollArea",
+        "rect" : [4, 4, 134, 202],
+        "scissoring" : true,
+        "buttons" : {
+          "horizontal" : {
+            "forward" : { "base" : "", "hover" : "", "pressed" : "" },
+            "backward" : { "base" : "", "hover": "", "pressed" : "" }
+          },
+          "vertical" : {
+            "forward" : { "base" : "/sys/stardust/quickbar/null.png?scalenearest=0;0", "hover" : "", "pressed" : "" },
+            "backward" : { "base" : "/sys/stardust/quickbar/null.png?scalenearest=0;0", "hover": "", "pressed" : "" }
+          }
+        },
+        "thumbs" : {
+          "horizontal" : {
+            "base" : { "begin" : "", "end" : "", "inner" : "" },
+            "hover" : { "begin" : "", "end" : "", "inner" : "" },
+            "pressed" : { "begin" : "", "end" : "", "inner" : "" }
+          },
+          "vertical" : {
+            "base" : {
+              "begin" : "/sys/stardust/quickbar/scrollbar.png:2",
+              "end" : "/sys/stardust/quickbar/scrollbar.png:0",
+              "inner" : "/sys/stardust/quickbar/scrollbar.png:1"
+            },
+            "hover" : {
+              "begin" : "/sys/stardust/quickbar/scrollbar.png:2",
+              "end" : "/sys/stardust/quickbar/scrollbar.png:0",
+              "inner" : "/sys/stardust/quickbar/scrollbar.png:1"
+            },
+            "pressed" : {
+              "begin" : "/sys/stardust/quickbar/scrollbar.png:2",
+              "end" : "/sys/stardust/quickbar/scrollbar.png:0",
+              "inner" : "/sys/stardust/quickbar/scrollbar.png:1"
+            }
+          }
+        },
+        "children" : {
+          "list" : {
+            "type" : "list",
+            "scissoring" : false,
+            "fillDown" : true,
+            "schema" : {
+              "spacing" : [0, 0],
+              "memberSize" : [132, 20],
+              "listTemplate" : {
+                "label" : {
+                  "type" : "label",
+                  "position" : [104, 11],
+                  "hAnchor" : "right",
+                  "vAnchor" : "mid",
+                  "wrapWidth" : 102,
+                  "value" : "Item Label"
+                },
+                "buttonContainer" : {
+                  "type" : "list",
+                  "position" : [105, 2],
+                  "scissoring" : false,
+                  "schema" : {
+                    "spacing" : [0, 0],
+                    "memberSize" : [18, 18],
+                    "listTemplate" : {
+                      "button" : {
+                        "type" : "button",
+                        "position" : [0, 0],
+                        "pressedOffset" : [0, 0],
+                        "base" : "/sys/stardust/quickbar/button.idle.png",
+                        "hover" : "/sys/stardust/quickbar/button.hover.png",
+                        "pressed" : "/sys/stardust/quickbar/button.idle.png",
+                        "callback" : "click"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }},
+    
+    {"op" : "add", "path" : "/stardust_qb_icon", "value" : {
+      "label" : "^pat_stardust;Stardust Quickbar",
+      "icon" : "/sys/stardust/quickbar/pat_openstardust.png",
+      "weight" : 1000,
+      "dismissQuickbar" : true,
+      "action" : ["ui", "quickbar:quickbar"]
+    }}
+  ],
+  [
+    {"op" : "test", "path" : "/compacted"},
+    {"op" : "add", "path" : "/gui/scroll/children/list/columns", "value": 6},
+    {"op" : "replace", "path" : "/gui/scroll/children/list/schema/memberSize/0", "value": 20},
+    {"op" : "remove", "path" : "/gui/scroll/children/list/schema/listTemplate/label"},
+    {"op" : "replace", "path" : "/gui/scroll/children/list/schema/listTemplate/buttonContainer/position/0", "value": 2},
+    {"op" : "replace", "path" : "/gui/scroll/rect/3", "value": 201},
+    {"op" : "add", "path" : "/scripts/-", "value" : "/sys/stardust/quickbar/compacttooltip.lua"}
+  ]
+]
