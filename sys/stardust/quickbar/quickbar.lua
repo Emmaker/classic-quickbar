@@ -144,17 +144,25 @@ local function buildList()
 end
 
 function init()
-  --close stardust quickbar
-  local ipc = getmetatable''.metagui_ipc
+  local m = getmetatable''
+  
+  --close stardust quickbar when opened
+  local ipc = m.metagui_ipc
   if ipc and ipc.uniqueByPath and ipc.uniqueByPath["/sys/quickbar/build.lua"] then
     ipc.uniqueByPath["/sys/quickbar/build.lua"]()
-    pane.dismiss()
-    return
+    
+    if not config.getParameter("mgipc_noDismiss") then
+      pane.dismiss()
+      return
+    end
   end
+  
+  m.pat_classicqb_dismiss = pane.dismiss
   
   buildList()
 end
 
 function uninit()
   widget.clearListItems("scroll.list")
+  getmetatable''.pat_classicqb_dismiss = nil
 end
