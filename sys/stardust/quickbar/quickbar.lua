@@ -69,58 +69,48 @@ local function buildList()
   
   -- stardust settings
   local settings = c.items["metagui:settings"]
-  if settings then
-    if metaguiSettings("pat_hideSettings", false) then
-      c.items["metagui:settings"] = nil
-    else
-      settings.label = "^pat_stardust;Stardust "..settings.label
-    end
-  end
+  if settings then settings.label = "^pat_stardust;Stardust "..settings.label end
   
-  --add stardust qb icon
+  -- stardust qb icon
   local starqb = config.getParameter("stardust_qb_icon")
-  if starqb then table.insert(items, starqb) end
-  
-  for k, i in pairs(c.items) do -- dump in normal items
-    if not i.condition or condition(table.unpack(i.condition)) then
-      table.insert(items, i)
-    end
-  end
+  if starqb then c.items["__stardustquickbar"] = starqb end
     
-  -- and then translate legacy entries
-  for _, i in pairs(c.priority) do
-    table.insert(items, {
-      label = "^essential;" .. i.label,
+  -- translate legacy entries
+  for _,i in ipairs(c.priority) do
+    c.items["_legacy.priority:"..i.label] = {
+      label = "^essential;"..i.label,
       icon = i.icon,
       weight = -1100,
       action = legacyAction(i)
-    })
+    }
   end
   if player.isAdmin() then
-    for _, i in pairs(c.admin) do
-      table.insert(items, {
-        label = "^admin;" .. i.label,
-        icon = i.icon,
-        weight = -1000,
+    for _,i in ipairs(c.admin) do
+      c.items["_legacy.admin:"..i.label] = {
+        label = "^admin;"..i.label,
+        icon = i.icon, weight = -1000,
         action = legacyAction(i),
         condition = { "admin" }
-      })
+      }
     end
   end
-  for _, i in pairs(c.normal) do
-    table.insert(items, {
+  for _,i in ipairs(c.normal) do
+    c.items["_legacy.normal:"..i.label] = {
       label = i.label,
       icon = i.icon,
       action = legacyAction(i)
-    })
+    }
   end
   
-  -- sort by weight then alphabetically, ignoring caps and tags (and doing tag substitutions while we're here)
-  for k, i in pairs(items) do
-    i._sort = string.lower(string.gsub(i.label, "(%b^;)", ""))
-    i.label = string.gsub(i.label, "(%b^;)", colorSub)
-    i.weight = i.weight or 0
-    --sb.logInfo("label: "..i.label.."\nsort: "..i._sort)
+  -- dump in items and sort them
+  local hidden = metaguiSettings("pat_hiddenIcons", {})
+  for k, i in pairs(c.items) do
+    if not hidden[k] and (not i.condition or condition(table.unpack(i.condition))) then
+      i._sort = string.lower(string.gsub(i.label, "(%b^;)", ""))
+      i.label = string.gsub(i.label, "(%b^;)", colorSub)
+      i.weight = i.weight or 0
+      table.insert(items, i)
+    end
   end
   table.sort(items, function(a, b) return a.weight < b.weight or (a.weight == b.weight and a._sort < b._sort) end)
   
@@ -134,7 +124,7 @@ local function buildList()
       if i.condition and not condition(table.unpack(i.condition)) then return nil end -- recheck condition on attempt
       action(table.unpack(i.action))
 
-      if (metaguiSettings("quickbarAutoDismiss", true) and not i.blockAutoDismiss) or i.dismissQuickbar then pane.dismiss() end
+      if (metaguiSettings("quickbarAutoDismiss", false) and not i.blockAutoDismiss) or i.dismissQuickbar then pane.dismiss() end
     end)
     local btn = bc .. "." .. widget.addListItem(bc) .. ".button"
     widget.setButtonOverlayImage(btn, i.icon or "/items/currency/essence.png")
@@ -146,7 +136,7 @@ end
 function init()
   local m = getmetatable''
   
-  --close stardust quickbar when opened
+  -- close stardust quickbar when opened
   local ipc = m.metagui_ipc
   if ipc and ipc.uniqueByPath and ipc.uniqueByPath["/sys/quickbar/build.lua"] then
     ipc.uniqueByPath["/sys/quickbar/build.lua"]()
@@ -157,6 +147,10 @@ function init()
     end
   end
   
+  if m.pat_classicqb_dismiss then
+    m.pat_classicqb_dismiss()
+    return pane.dismiss()
+  end
   m.pat_classicqb_dismiss = pane.dismiss
   
   buildList()
