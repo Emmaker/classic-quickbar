@@ -89,19 +89,22 @@ do
         image:queueRedraw()
       end
     end
+    
+    p.iconList:addChild({ type = "panel", style = "flat", children = {
+      { type = "label", text = "this is scungus :)      he HATES metagui" },
+      { type = "image", file = "/metagui/scungus.png", scale = 0.25 }
+    }})
   end
   
-  function p:save() mg.settings.pat_hiddenIcons = Hidden end
+  function p:save()
+    mg.settings.pat_hiddenIcons = Hidden
+    local m = getmetatable''
+    
+    if m.pat_classicqb_rebuild then
+      metagui.startEvent(function()
+        util.wait(0.02)
+        m.pat_classicqb_rebuild()
+      end)
+    end
+  end
 end
-
-
-
-
---[[ meow :3
-[{
-  { type = "panel", style = "convex", children = {
-    { type = "label", text = "this is scungus :)      he HATES metagui" },
-    { type = "image", file = "/metagui/scungus.png", scale = 0.25 }
-  }}
-}
-]]

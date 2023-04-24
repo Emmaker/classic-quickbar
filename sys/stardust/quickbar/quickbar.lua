@@ -151,12 +151,16 @@ function init()
     m.pat_classicqb_dismiss()
     return pane.dismiss()
   end
+  
   m.pat_classicqb_dismiss = pane.dismiss
+  m.pat_classicqb_rebuild = buildList
   
   buildList()
 end
 
 function uninit()
   widget.clearListItems("scroll.list")
-  getmetatable''.pat_classicqb_dismiss = nil
+  local m = getmetatable''
+  m.pat_classicqb_dismiss = nil
+  m.pat_classicqb_rebuild = nil
 end
