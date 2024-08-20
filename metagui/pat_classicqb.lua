@@ -15,6 +15,7 @@ do
     contents = {
       { type = "scrollArea", children = {
         {
+          2,
           { type = "checkBox", id = "pat_compactQuickbar", checked = default(mgui.settings.pat_compactQuickbar, false) },
           { type = "label", text = strings.enableCompact, expand = true }
         },
@@ -26,7 +27,7 @@ do
         { type = "panel", style = "convex", expandMode = {1, 2}, children = {
           { type = "layout", id = "iconList", mode = "vertical", spacing = 1, children = {} }
         }},
-        5,
+        4,
         { type = "panel", style = "flat", expandMode = {1, 0}, children = {
           { type = "label", text = strings.scungus },
           { type = "image", file = "/metagui/scungus.png", scale = 0.25 }
@@ -81,13 +82,17 @@ do
       local icon = item.icon
       local name = item.label
       local icon_off = icon.."?saturation=-50?brightness=-25"
-      local name_off = "^#f00;[hidden]^reset; ^lightgray;"..string.gsub(name, "(%b^;)", "")
+      local name_off = "^lightgray;"..string.gsub(name, "(%b^;)", "")
       
       local listItem = page.iconList:addChild(
         { type = "menuItem", children = {
           { type = "image", id = id..".image", size = {18, 18}, noAutoCrop = true, file = hide and icon_off or icon },
           {
-            { type = "label", id = id..".label", text = hide and name_off or name },
+            {
+              { type = "image", id = id..".hideIcon", file = "/sys/stardust/quickbar/hidden.png", visible = hide },
+              0,
+              { type = "label", id = id..".label", text = hide and name_off or name }
+            },
             { type = "label", id = id..".idlabel", text = id, color = "888" }
           }
         }}
@@ -106,12 +111,14 @@ do
       
       local image = page[id..".image"]
       local label = page[id..".label"]
+      local hideIcon = page[id..".hideIcon"]
       
       --togglerer
       function listItem:onClick()
         hide = not hide
         hiddenIcons[id] = hide or nil
-        
+
+        hideIcon:setVisible(hide)
         label:setText(hide and name_off or name)
         image:setFile(hide and icon_off or icon)
         image:queueRedraw()
