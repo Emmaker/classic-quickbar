@@ -1,4 +1,5 @@
 [
+  { "op": "add", "path": "/pat_classicQuickbar", "value": true },
   { "op": "replace", "path": "/scripts", "value": [ "/pat/classicquickbar/quickbar.lua" ] },
   { "op": "remove", "path": "/config" },
   {
