@@ -93,6 +93,17 @@ do
         }}
       )
       
+      if id == "_stardustquickbar" then
+        listItem:addChild({ type = "button", id = "pat_openStardustQuickbar", caption = strings.openStardustQuickbar, inline = true, size = 48 })
+        function page.pat_openStardustQuickbar:onClick()
+          player.interact("ScriptPane", { gui = {}, scripts = {"/metagui.lua"}, config = "quickbar:quickbar" })
+          local shared = getmetatable''
+          if shared.pat_classicqb_dismiss then
+            shared.pat_classicqb_dismiss()
+          end
+        end
+      end
+      
       local image = page[id..".image"]
       local label = page[id..".label"]
       
