@@ -1,5 +1,5 @@
 [
-  { "op": "replace", "path": "/scripts", "value": [ "/sys/stardust/quickbar/quickbar.lua" ] },
+  { "op": "replace", "path": "/scripts", "value": [ "/pat/classicquickbar/quickbar.lua" ] },
   { "op": "remove", "path": "/config" },
   {
     "op": "replace",

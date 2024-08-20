@@ -7,11 +7,11 @@ local function default(v, d)
 end
 
 do
-  local strings = root.assetJson("/metagui/pat_classicqb.json:settings")
+  local strings = root.assetJson("/pat/classicquickbar/config.json:settings")
 
   local page = module:page({
     title = strings.title,
-    icon = "/sys/stardust/quickbar/pat_openstardust.png?border=1;000;0000",
+    icon = "/pat/classicquickbar/stardustbar.png?border=1;000;0000",
     contents = {
       { type = "scrollArea", children = {
         {
@@ -89,7 +89,7 @@ do
           { type = "image", id = id..".image", size = {18, 18}, noAutoCrop = true, file = hide and icon_off or icon },
           {
             {
-              { type = "image", id = id..".hideIcon", file = "/sys/stardust/quickbar/hidden.png", visible = hide },
+              { type = "image", id = id..".hideIcon", file = "/pat/classicquickbar/hidden.png", visible = hide },
               0,
               { type = "label", id = id..".label", text = hide and name_off or name }
             },

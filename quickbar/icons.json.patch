@@ -32,7 +32,7 @@
     "path": "/openStardustQuickbar",
     "value": {
       "label": "^pat_stardust;Stardust Quickbar",
-      "icon": "/sys/stardust/quickbar/pat_openstardust.png",
+      "icon": "/pat/classicquickbar/stardustbar.png",
       "weight": 1000,
       "dismissQuickbar": true,
       "action": [ "ui", "quickbar:quickbar" ]

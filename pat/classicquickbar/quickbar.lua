@@ -1,5 +1,5 @@
 require "/sys/quickbar/conditions.lua"
-require "/sys/stardust/quickbar/actions.lua"
+require "/pat/classicquickbar/actions.lua"
 
 local hoverTooltips = { }
 local tooltipsEnabled = false
