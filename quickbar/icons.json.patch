@@ -29,13 +29,14 @@
   },
   {
     "op": "add",
-    "path": "/openStardustQuickbar",
+    "path": "/items/_stardustquickbar",
     "value": {
       "label": "^pat_stardust;Stardust Quickbar",
       "icon": "/pat/classicquickbar/stardustbar.png",
       "weight": 1000,
       "dismissQuickbar": true,
-      "action": [ "ui", "quickbar:quickbar" ]
+      "action": [ "ui", "quickbar:quickbar" ],
+      "condition": [ "pat_classicQuickbar" ]
     }
   }
 ]

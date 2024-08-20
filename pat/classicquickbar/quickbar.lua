@@ -1,5 +1,6 @@
-require "/sys/quickbar/conditions.lua"
 require "/pat/classicquickbar/actions.lua"
+require "/sys/quickbar/conditions.lua"
+conditions.pat_classicQuickbar = function() return true end
 
 local hoverTooltips = { }
 local tooltipsEnabled = false
@@ -25,10 +26,6 @@ local function buildList()
 
   local listData = widget.getData("scroll.list") or {}
   tooltipsEnabled = listData.tooltips
-
-  if iconConfig.openStardustQuickbar then
-    iconConfig.items._stardustquickbar = iconConfig.openStardustQuickbar
-  end
 
   -- translate legacy entries
   for k, tr in pairs(iconConfig.legacyTranslation) do

@@ -36,14 +36,13 @@ do
     }
   })
 
-  local hiddenIcons = mgui.settings.pat_hiddenIcons or {}
+  local hiddenIcons = default(mgui.settings.pat_hiddenIcons, {})
 
   function page:init()
     local iconConfig = root.assetJson("/quickbar/icons.json")
     local items = { }
 
-    if iconConfig.openStardustQuickbar then
-      iconConfig.items._stardustquickbar = iconConfig.openStardustQuickbar
+    if iconConfig.items._stardustquickbar then
       iconConfig.items._stardustquickbar.weight = -math.huge
     end
 
@@ -101,7 +100,7 @@ do
       if id == "_stardustquickbar" then
         listItem:addChild({ type = "button", id = "pat_openStardustQuickbar", caption = strings.openStardustQuickbar, inline = true, size = 48 })
         function page.pat_openStardustQuickbar:onClick()
-          player.interact("ScriptPane", { gui = {}, scripts = {"/metagui.lua"}, config = "quickbar:quickbar" })
+          player.interact("ScriptPane", { gui = { }, scripts = { "/metagui.lua" }, config = "quickbar:quickbar" })
           local shared = getmetatable''
           if shared.pat_classicqb_dismiss then
             shared.pat_classicqb_dismiss()
