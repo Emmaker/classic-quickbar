@@ -1,6 +1,9 @@
 require "/sys/quickbar/conditions.lua"
 require "/sys/stardust/quickbar/actions.lua"
 
+local hoverTooltips = { }
+local tooltipsEnabled = false
+
 local function getMetaguiSetting(key, default)
   local settings = player.getProperty("metagui:settings", {})
   if settings[key] == nil then
@@ -14,11 +17,14 @@ local function buildList()
   local listWidgets = config.getParameter("listWidgets")
   local compact = getMetaguiSetting("pat_compactQuickbar", false)
   widget.addChild("scroll", listWidgets[compact and "compact" or "default"], "list")
-
   widget.clearListItems("scroll.list")
 
   local iconConfig = root.assetJson("/quickbar/icons.json")
   local items = { }
+  hoverTooltips = { }
+
+  local listData = widget.getData("scroll.list") or {}
+  tooltipsEnabled = listData.tooltips
 
   if iconConfig.openStardustQuickbar then
     iconConfig.items.__stardustquickbar = iconConfig.openStardustQuickbar
@@ -78,6 +84,8 @@ function addQuickbarItem(item)
   
   local button = container .. "." .. widget.addListItem(container) .. ".button"
   widget.setButtonOverlayImage(button, item.icon or "/items/currency/essence.png")
+
+  hoverTooltips["."..button] = string.format(" %s ", item.label)
 end
 
 function init()
@@ -113,8 +121,9 @@ function uninit()
 end
 
 function createTooltip(screenPosition)
+  if not tooltipsEnabled then return end
+
   local childAt = widget.getChildAt(screenPosition)
   if not childAt then return end
-
-  --todo: make the tooltips exist
+  return hoverTooltips[childAt]
 end
