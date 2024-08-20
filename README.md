@@ -1,10 +1,7 @@
-# Quickbar Mini
-A standalone version of the Quickbar from zetaPRIME's [StardustLib](https://github.com/zetaPRIME/sb.StardustSuite) mod.
+# Classic Quickbar
 
-The mod replaces the matter manipulator option for quick access to multiple different interfaces.  
-Other mods can easily add their own interfaces to the Quickbar with a simple patch.
+a fork of Silverfeelin's [standalone version of the Quickbar](https://github.com/Silverfeelin/Starbound-Quickbar-Mini) from zetaPRIME's [StardustLib](https://github.com/zetaPRIME/sb.StardustSuite) mod
 
-Steam: https://steamcommunity.com/workshop/filedetails/?id=1088459034
+restores the original (non-metagui) Quickbar while supporting newer versions & features of Stardust Core (lite)
 
-| ![](https://i.imgur.com/gQLxJlD.png) |
-|---|
+Steam workshop page: https://steamcommunity.com/sharedfiles/filedetails/?id=2957136802
