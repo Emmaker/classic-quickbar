@@ -27,7 +27,7 @@ local function buildList()
   tooltipsEnabled = listData.tooltips
 
   if iconConfig.openStardustQuickbar then
-    iconConfig.items.__stardustquickbar = iconConfig.openStardustQuickbar
+    iconConfig.items._stardustquickbar = iconConfig.openStardustQuickbar
   end
 
   -- translate legacy entries

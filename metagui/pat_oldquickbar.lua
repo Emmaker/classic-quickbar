@@ -1,5 +1,5 @@
 local mgui = metagui
-local module = settings.module { weight = 0 }
+local module = settings.module({ weight = 0 })
 
 local function default(v, d)
   if v == nil then return d end
@@ -41,8 +41,8 @@ do
     local items = { }
 
     if iconConfig.openStardustQuickbar then
-      iconConfig.items.__stardustquickbar = iconConfig.openStardustQuickbar
-      iconConfig.items.__stardustquickbar.weight = math.huge
+      iconConfig.items._stardustquickbar = iconConfig.openStardustQuickbar
+      iconConfig.items._stardustquickbar.weight = -math.huge
     end
 
     --translate legacy entries
@@ -83,9 +83,8 @@ do
       local name_off = "^#f00;[hidden]^reset; ^lightgray;"..string.gsub(name, "(%b^;)", "")
       
       local listItem = page.iconList:addChild(
-        {type = "menuItem", children = {
-          { type = "image", id = id..".image", size = {18, 18}, noAutoCrop = true, file = hide and icon_off or icon},
-          4,
+        { type = "menuItem", children = {
+          { type = "image", id = id..".image", size = {18, 18}, noAutoCrop = true, file = hide and icon_off or icon },
           {
             { type = "label", id = id..".label", text = hide and name_off or name },
             { type = "label", id = id..".idlabel", text = id, color = "888" }
@@ -97,7 +96,7 @@ do
       local label = page[id..".label"]
       
       --togglerer
-      listItem.onClick = function()
+      function listItem:onClick()
         hide = not hide
         hiddenIcons[id] = hide or nil
         
