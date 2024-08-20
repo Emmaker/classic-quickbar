@@ -15,7 +15,7 @@ do
     contents = {
       { type = "scrollArea", children = {
         {
-          { type = "checkBox", id = "pat_compactQuickbar", checked = default(mgui.settings.pat_compactQuickbar, true) },
+          { type = "checkBox", id = "pat_compactQuickbar", checked = default(mgui.settings.pat_compactQuickbar, false) },
           { type = "label", text = strings.enableCompact, expand = true }
         },
         4,
