@@ -7,27 +7,28 @@ local function default(v, d)
 end
 
 do
+  local strings = root.assetJson("/metagui/pat_classicqb.json:settings")
 
   local page = module:page({
-    title = "Classic Quickbar",
+    title = strings.title,
     icon = "/sys/stardust/quickbar/pat_openstardust.png?border=1;000;0000",
     contents = {
       { type = "scrollArea", children = {
         {
           { type = "checkBox", id = "pat_compactQuickbar", checked = default(mgui.settings.pat_compactQuickbar, true) },
-          { type = "label", text = "Compact Mode", expand = true }
+          { type = "label", text = strings.enableCompact, expand = true }
         },
         4,
         {
           4,
-          { type = "label", text = "Click items to hide/unhide:", inline = true, expand = true }
+          { type = "label", text = strings.hideItems, inline = true, expand = true }
         },
         { type = "panel", style = "convex", expandMode = {1, 2}, children = {
           { type = "layout", id = "iconList", mode = "vertical", spacing = 1, children = {} }
         }},
         5,
         { type = "panel", style = "flat", expandMode = {1, 0}, children = {
-          { type = "label", text = "this is scungus :)      he HATES metagui" },
+          { type = "label", text = strings.scungus },
           { type = "image", file = "/metagui/scungus.png", scale = 0.25 }
         }}
       }}
