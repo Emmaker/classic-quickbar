@@ -1,3 +1,7 @@
 [
-  {"op" : "add", "path" : "/settings/pat_oldquickbar", "value" : "/metagui/pat_oldquickbar.lua"}
+  {
+    "op": "add",
+    "path": "/settings/pat_oldquickbar",
+    "value": "/metagui/pat_oldquickbar.lua"
+  }
 ]
