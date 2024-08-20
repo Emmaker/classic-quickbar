@@ -1,27 +1,41 @@
 [
-  [
-    {
-      "op": "add",
-      "path": "/legacyTranslation",
-      "value": {
-        "priority": { "prefix": "^essential;", "weight": -1100 },
-        "admin": { "prefix": "^admin;", "weight": -1000 },
-        "normal": { }
-      }
-    },
-    {
-      "op": "add",
-      "path": "/colorTags",
-      "value": {
-        "^essential;" : "^#ffb133;",
-        "^admin;" : "^#bf7fff;",
-        "^pat_stardust;" : "^#C6C4FF;"
-      }
-    },
-    {
-      "op": "add",
-      "path": "/items/metagui:settings/classicLabel",
-      "value": "^pat_stardust;Stardust Settings"
+  {
+    "op": "add",
+    "path": "/legacyTranslation",
+    "value": {
+      "priority": { "prefix": "^essential;", "weight": -1100 },
+      "admin": { "prefix": "^admin;", "weight": -1000 },
+      "normal": { }
     }
-  ]
+  },
+  {
+    "op": "add",
+    "path": "/colorTags",
+    "value": {
+      "^essential;": "^#ffb133;",
+      "^admin;": "^#bf7fff;",
+      "^pat_stardust;": "^#C6C4FF;"
+    }
+  },
+  {
+    "op": "add",
+    "path": "/items/metagui:settings/classicLabel",
+    "value": "^pat_stardust;Stardust Settings"
+  },
+  {
+    "op": "add",
+    "path": "/items/metagui:settings/unhideable",
+    "value": true
+  },
+  {
+    "op": "add",
+    "path": "/openStardustQuickbar",
+    "value": {
+      "label": "^pat_stardust;Stardust Quickbar",
+      "icon": "/sys/stardust/quickbar/pat_openstardust.png",
+      "weight": 1000,
+      "dismissQuickbar": true,
+      "action": [ "ui", "quickbar:quickbar" ]
+    }
+  }
 ]

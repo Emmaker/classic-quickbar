@@ -10,10 +10,19 @@ local function getMetaguiSetting(key, default)
 end
 
 local function buildList()
+  widget.removeChild("scroll", "list")
+  local listWidgets = config.getParameter("listWidgets")
+  local compact = getMetaguiSetting("pat_compactQuickbar", false)
+  widget.addChild("scroll", listWidgets[compact and "compact" or "default"], "list")
+
   widget.clearListItems("scroll.list")
 
   local iconConfig = root.assetJson("/quickbar/icons.json")
   local items = { }
+
+  if iconConfig.openStardustQuickbar then
+    iconConfig.items.__stardustquickbar = iconConfig.openStardustQuickbar
+  end
 
   -- translate legacy entries
   for k, tr in pairs(iconConfig.legacyTranslation) do
@@ -31,7 +40,7 @@ local function buildList()
   local hiddenItems = getMetaguiSetting("pat_hiddenIcons", {})
   
   for k, item in pairs(iconConfig.items) do
-    if not hiddenItems[k] and (not item.condition or condition(table.unpack(item.condition))) then
+    if (item.unhideable or not hiddenItems[k]) and (not item.condition or condition(table.unpack(item.condition))) then
       local label = item.classicLabel or item.label
       item._sort = string.gsub(label, "(%b^;)", ""):lower()
       item.label = string.gsub(label, "(%b^;)", iconConfig.colorTags)
@@ -101,4 +110,11 @@ function uninit()
   local shared = getmetatable''
   shared.pat_classicqb_dismiss = nil
   shared.pat_classicqb_rebuild = nil
+end
+
+function createTooltip(screenPosition)
+  local childAt = widget.getChildAt(screenPosition)
+  if not childAt then return end
+
+  --todo: make the tooltips exist
 end
