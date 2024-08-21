@@ -1,5 +1,13 @@
 local shared = getmetatable''
 
+function getMetaguiSetting(key, default)
+  local settings = player.getProperty("metagui:settings", {})
+  if settings[key] == nil then
+    return default
+  end
+  return settings[key]
+end
+
 function dismissStardustQB()
   local ipc = shared.metagui_ipc
   if not ipc or not ipc.uniqueByPath then

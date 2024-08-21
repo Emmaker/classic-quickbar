@@ -6,14 +6,6 @@ conditions.pat_classicQuickbar = function() return true end
 local hoverTooltips = { }
 local tooltipsEnabled = false
 
-local function getMetaguiSetting(key, default)
-  local settings = player.getProperty("metagui:settings", {})
-  if settings[key] == nil then
-    return default
-  end
-  return settings[key]
-end
-
 local function buildList()
   widget.removeChild("scroll", "list")
   local listWidgets = config.getParameter("listWidgets")
