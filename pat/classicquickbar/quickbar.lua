@@ -1,3 +1,4 @@
+require "/pat/classicquickbar/shared.lua"
 require "/pat/classicquickbar/actions.lua"
 require "/sys/quickbar/conditions.lua"
 conditions.pat_classicQuickbar = function() return true end
@@ -86,27 +87,15 @@ function addQuickbarItem(item)
 end
 
 function init()
-  local shared = getmetatable''
-
-  -- close stardust quickbar
-  local ipc = shared.metagui_ipc
-  if ipc and ipc.uniqueByPath and not config.getParameter("mgipc_noDismiss") then
-    local path = root.assetJson("/metagui/registry.json:panes.quickbar.quickbar")
-    if ipc.uniqueByPath[path] then
-      ipc.uniqueByPath[path]()
-      return pane.dismiss()
-    end
-  end
-  
-  if shared.pat_classicqb_dismiss then
-    shared.pat_classicqb_dismiss()
+  if dismissStardustQB() or dismissClassicQB() then
     return pane.dismiss()
   end
   
+  buildList()
+  
+  local shared = getmetatable''
   shared.pat_classicqb_dismiss = pane.dismiss
   shared.pat_classicqb_rebuild = buildList
-  
-  buildList()
 end
 
 function uninit()
