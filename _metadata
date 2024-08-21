@@ -4,7 +4,7 @@
   "name": "pat_QuickbarClassic",
   "author": "patman, Zia Satazaki, SilverFeelin",
   "description": "",
-  "includes": [ "StardustLib", "QuickbarMini", "CompactQuickbar" ],
+  "includes": [ "StardustLib", "QuickbarMini", "CompactQuickbar", "communityframework" ],
   "link": "steam://url/CommunityFilePage/2957136802",
   "steamContentId": "2957136802"
 }
