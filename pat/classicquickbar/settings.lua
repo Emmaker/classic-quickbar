@@ -121,30 +121,37 @@ do
     end
   end
 
-  function page:save()
-    local classicChecked = page.pat_classicEnabled.checked
-    if mgui.settings.pat_classicEnabled ~= classicChecked then
-      mgui.settings.pat_classicEnabled = classicChecked
-      metagui.startEvent(function()
-        if dismissQuickbar() then
-          util.wait(0.02)
-          openQuickbar()
-        end
-      end)
-    end
-
-    mgui.settings.pat_compactQuickbar = page.pat_compactQuickbar.checked
-    mgui.settings.pat_hiddenIcons = hiddenIcons
-    
-    apply.color = nil
-    
+  
+  local function rebuildQbList()
+    coroutine.yield()
     local shared = getmetatable''
     if shared.pat_classicqb_rebuild then
-      metagui.startEvent(function()
-        util.wait(0.02)
-        shared.pat_classicqb_rebuild()
-      end)
+      shared.pat_classicqb_rebuild()
     end
+  end
+
+  local function reopenQb()
+    coroutine.yield()
+    if dismissQuickbar() then
+      coroutine.yield()
+      openQuickbar()
+    end
+  end
+
+  function page:save()
+    local s = mgui.settings
+    s.pat_hiddenIcons = hiddenIcons
+    s.pat_compactQuickbar = page.pat_compactQuickbar.checked
+
+    local classicCheck = page.pat_classicEnabled.checked
+    if s.pat_classicEnabled ~= classicCheck then
+      s.pat_classicEnabled = classicCheck
+      metagui.startEvent(reopenQb)
+    else
+      metagui.startEvent(rebuildQbList)
+    end
+
+    apply.color = nil
   end
 
 end
