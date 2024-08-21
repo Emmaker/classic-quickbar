@@ -33,7 +33,7 @@ do
         4,
         { type = "panel", style = "flat", expandMode = {1, 0}, children = {
           { type = "label", text = strings.scungus },
-          { type = "image", file = "/metagui/scungus.png", scale = 0.25 }
+          { type = "image", file = "/pat/classicquickbar/scungus.png", scale = 0.25 }
         }}
       }}
     }
