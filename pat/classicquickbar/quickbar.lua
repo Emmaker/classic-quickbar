@@ -21,14 +21,7 @@ local function buildList()
   local listData = widget.getData("scroll.list") or {}
   tooltipsEnabled = listData.tooltips
 
-  translateLegacyItems(iconConfig, qbConfig.legacyTranslation, function(item, tr)
-    return {
-      label = (tr.prefix or "")..item.label,
-      icon = item.icon,
-      weight = tr.weight or 0,
-      action = legacyAction(item)
-    }
-  end)
+  translateLegacyItems(iconConfig, qbConfig.legacyTranslation)
   
   local hiddenItems = getHiddenItems(iconConfig.items)
   

@@ -30,12 +30,3 @@ local function nullfunc() end
 function action(id, ...)
   return (actions[id] or nullfunc)(...)
 end
-
-function legacyAction(i)
-  if i.pane then return { "pane", i.pane } end
-  if i.scriptAction then
-    sb.logInfo(string.format("Quickbar item \"%s\": scriptAction is deprecated, please use new entry format", i.label))
-    return { "_legacy_module", i.scriptAction }
-  end
-  return { "null" }
-end

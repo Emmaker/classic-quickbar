@@ -8,11 +8,25 @@ function getMetaguiSetting(key, default)
   return settings[key]
 end
 
-function translateLegacyItems(iconConfig, translation, func)
+function translateLegacyAction(item)
+  if item.pane then return { "pane", item.pane } end
+  if item.scriptAction then
+    sb.logInfo(string.format("Quickbar item '%s': scriptAction is deprecated, please use new entry format", item.label))
+    return { "_legacy_module", item.scriptAction }
+  end
+  return { "null" }
+end
+
+function translateLegacyItems(iconConfig, translation)
   for k, tr in pairs(translation) do
     for _, item in ipairs(iconConfig[k]) do
       local id = string.format("_legacy.%s:%s", k, item.label)
-      iconConfig.items[id] = func(item, tr)
+      iconConfig.items[id] = {
+        label = (tr.prefix or "")..item.label,
+        icon = item.icon,
+        weight = tr.weight or 0,
+        action = translateLegacyAction(item)
+      }
     end
   end
 end

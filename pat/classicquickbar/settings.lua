@@ -50,13 +50,7 @@ do
       iconConfig.items._stardustquickbar.weight = -math.huge
     end
 
-    translateLegacyItems(iconConfig, qbConfig.legacyTranslation, function(item, tr)
-      return {
-        label = (tr.prefix or "")..item.label,
-        icon = item.icon,
-        weight = math.huge
-      }
-    end)
+    translateLegacyItems(iconConfig, qbConfig.legacyTranslation)
 
     self.hiddenIcons = getHiddenItems(iconConfig.items)
     
