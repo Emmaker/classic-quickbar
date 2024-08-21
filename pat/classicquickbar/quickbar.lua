@@ -7,38 +7,30 @@ local hoverTooltips = { }
 local tooltipsEnabled = false
 
 local function buildList()
-  widget.removeChild("scroll", "list")
-  local listWidgets = config.getParameter("listWidgets")
   local compact = getMetaguiSetting("pat_compactQuickbar", false)
-  widget.addChild("scroll", listWidgets[compact and "compact" or "default"], "list")
-  widget.clearListItems("scroll.list")
-
-  local qbConfig = root.assetJson("/pat/classicquickbar/config.json")
-  local iconConfig = root.assetJson("/quickbar/icons.json")
-  local itemList = { }
-  hoverTooltips = { }
+  local listWidgets = config.getParameter("listWidgets")
+  local listConfig = listWidgets[compact and "compact" or "default"]
+  widget.removeChild("scroll", "list")
+  widget.addChild("scroll", listConfig, "list")
 
   local listData = widget.getData("scroll.list") or {}
   tooltipsEnabled = listData.tooltips
 
-  translateLegacyItems(iconConfig, qbConfig.legacyTranslation)
-  
-  local hiddenItems = getHiddenItems(iconConfig.items)
-  
-  for k, item in pairs(iconConfig.items) do
-    if (item.unhideable or not hiddenItems[k]) and (not item.condition or condition(table.unpack(item.condition))) then
-      addItem(itemList, item, qbConfig.colorTags)
+  hoverTooltips = { }
+
+  local itemList = getQuickbarItems(function(item, hidden)
+    if not item.unhideable and hidden then
+      return false
     end
-  end
-  
-  sortItems(itemList)
+    return not item.condition or condition(table.unpack(item.condition))
+  end)
   
   for _, item in ipairs(itemList) do
-    addQuickbarItem(item)
+    addQuickbarButton(item)
   end
 end
 
-local function itemCallback(item)
+local function buttonCallback(item)
   if item.condition and not condition(table.unpack(item.condition)) then -- recheck condition on attempt
     pane.playSound("/sfx/interface/clickon_error.ogg")
     return nil
@@ -51,17 +43,17 @@ local function itemCallback(item)
   end
 end
 
-function addQuickbarItem(item)
+function addQuickbarButton(item)
   local newListItem = "scroll.list." .. widget.addListItem("scroll.list")
   widget.setText(newListItem .. ".label", item.label)
 
   local container = newListItem .. ".buttonContainer"
-  widget.registerMemberCallback(container, "click", function() itemCallback(item) end)
+  widget.registerMemberCallback(container, "click", function() buttonCallback(item) end)
   
   local button = container .. "." .. widget.addListItem(container) .. ".button"
   widget.setButtonOverlayImage(button, item.icon)
 
-  hoverTooltips["."..button] = string.format(" %s ", item.label)
+  hoverTooltips["." .. button] = string.format(" %s ", item.label)
 end
 
 function init()

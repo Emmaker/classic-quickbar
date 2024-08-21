@@ -1,7 +1,7 @@
 [
   {
     "op": "add",
-    "path": "/items/metagui:settings/classicLabel",
+    "path": "/items/metagui:settings/label",
     "value": "^pat_stardust;Stardust Settings"
   },
   {

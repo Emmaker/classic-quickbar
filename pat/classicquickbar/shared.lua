@@ -8,7 +8,7 @@ function getMetaguiSetting(key, default)
   return settings[key]
 end
 
-function translateLegacyAction(item)
+local function translateLegacyAction(item)
   if item.pane then return { "pane", item.pane } end
   if item.scriptAction then
     sb.logInfo(string.format("Quickbar item '%s': scriptAction is deprecated, please use new entry format", item.label))
@@ -17,7 +17,7 @@ function translateLegacyAction(item)
   return { "null" }
 end
 
-function translateLegacyItems(iconConfig, translation)
+local function translateLegacyItems(iconConfig, translation)
   for k, tr in pairs(translation) do
     for _, item in ipairs(iconConfig[k]) do
       local id = string.format("_legacy.%s:%s", k, item.label)
@@ -31,32 +31,44 @@ function translateLegacyItems(iconConfig, translation)
   end
 end
 
-function getHiddenItems(itemTable)
+local function getHiddenItems(itemTable)
   local hidden = getMetaguiSetting("pat_hiddenIcons", nil)
 
   if not hidden and itemTable then
-    hidden = {}
+    hidden = { }
     for k, item in pairs(itemTable) do
-      if item.defaultHidden then
-        hidden[k] = true
-      end
+      hidden[k] = item.defaultHidden or nil
     end
   end
 
-  return hidden or {}
+  return hidden or { }
 end
 
-function addItem(itemList, item, colorTags)
-  local label = item.classicLabel or item.label
-  item._sort = string.gsub(label, "(%b^;)", ""):lower()
-  item.label = string.gsub(label, "(%b^;)", colorTags or {})
-  item.icon = item.icon or "/items/currency/essence.png"
-  item.weight = item.weight or 0
-  itemList[#itemList + 1] = item
-end
+function getQuickbarItems(filter)
+  local qbConfig = root.assetJson("/pat/classicquickbar/config.json")
+  local iconConfig = root.assetJson("/quickbar/icons.json")
+  local hiddenItems = getHiddenItems(iconConfig.items)
+  local itemList = { }
 
-function sortItems(itemList)
-  table.sort(itemList, function(a, b) return a.weight < b.weight or (a.weight == b.weight and a._sort < b._sort) end)
+  translateLegacyItems(iconConfig, qbConfig.legacyTranslation)
+
+  for k, item in pairs(iconConfig.items) do
+    if not filter or filter(item, hiddenItems[k]) then
+      item._id = k
+      item._hidden = hiddenItems[k] or false
+      item._sort = string.gsub(item.label, "(%b^;)", ""):lower()
+      item.label = string.gsub(item.label, "(%b^;)", qbConfig.colorTags)
+      item.icon = item.icon or "/items/currency/essence.png"
+      item.weight = item.weight or 0
+      itemList[#itemList + 1] = item
+    end
+  end
+
+  table.sort(itemList, function(a, b)
+    return a.weight < b.weight or (a.weight == b.weight and a._sort < b._sort)
+  end)
+
+  return itemList, hiddenItems
 end
 
 
