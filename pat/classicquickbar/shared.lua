@@ -1,7 +1,7 @@
 local shared = getmetatable''
 
 function getMetaguiSetting(key, default)
-  local settings = player.getProperty("metagui:settings", {})
+  local settings = player.getProperty("metagui:settings") or {}
   if settings[key] == nil then
     return default
   end
