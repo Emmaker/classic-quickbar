@@ -1,5 +1,5 @@
-local actions = {}
-qbActions = actions -- alias for execs
+actions = {}
+qbActions = actions -- alias for compatibility
 
 function actions.pane(cfg)
   if type(cfg) ~= "table" then cfg = { config = cfg } end
