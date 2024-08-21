@@ -5,5 +5,15 @@
     "hideItems": "Click items to hide / unhide them:",
     "openStardustQuickbar": "Open",
     "scungus": "this is scungus :)      he HATES metagui"
+  },
+  "legacyTranslation": {
+    "priority": { "prefix": "^essential;", "weight": -1100 },
+    "admin": { "prefix": "^admin;", "weight": -1000 },
+    "normal": { }
+  },
+  "colorTags": {
+    "^essential;": "^#ffb133;",
+    "^admin;": "^#bf7fff;",
+    "^pat_stardust;": "^#C6C4FF;"
   }
 }

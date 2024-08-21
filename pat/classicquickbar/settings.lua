@@ -9,7 +9,8 @@ local function default(v, d)
 end
 
 do
-  local strings = root.assetJson("/pat/classicquickbar/config.json:settings")
+  local qbConfig = root.assetJson("/pat/classicquickbar/config.json")
+  local strings = qbConfig.settings
 
   local page = module:page({
     title = strings.title,
@@ -49,7 +50,7 @@ do
     end
 
     --translate legacy entries
-    for k, tr in pairs(iconConfig.legacyTranslation) do
+    for k, tr in pairs(qbConfig.legacyTranslation) do
       for _, item in ipairs(iconConfig[k]) do
         local id = string.format("_legacy.%s:%s", k, item.label)
         iconConfig.items[id] = {
@@ -66,7 +67,7 @@ do
         local label = item.classicLabel or item.label
         item._id = k
         item._sort = string.lower(string.gsub(label, "(%b^;)", ""))
-        item.label = string.gsub(label, "(%b^;)", iconConfig.colorTags)
+        item.label = string.gsub(label, "(%b^;)", qbConfig.colorTags)
         item.icon = item.icon or "/items/currency/essence.png"
         item.weight = item.weight or 0
         items[#items + 1] = item

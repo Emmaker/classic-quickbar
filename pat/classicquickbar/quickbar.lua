@@ -13,6 +13,7 @@ local function buildList()
   widget.addChild("scroll", listWidgets[compact and "compact" or "default"], "list")
   widget.clearListItems("scroll.list")
 
+  local qbConfig = root.assetJson("/pat/classicquickbar/config.json")
   local iconConfig = root.assetJson("/quickbar/icons.json")
   local items = { }
   hoverTooltips = { }
@@ -21,7 +22,7 @@ local function buildList()
   tooltipsEnabled = listData.tooltips
 
   -- translate legacy entries
-  for k, tr in pairs(iconConfig.legacyTranslation) do
+  for k, tr in pairs(qbConfig.legacyTranslation) do
     for _, item in ipairs(iconConfig[k]) do
       local id = string.format("_legacy.%s:%s", k, item.label)
       iconConfig.items[id] = {
@@ -39,7 +40,7 @@ local function buildList()
     if (item.unhideable or not hiddenItems[k]) and (not item.condition or condition(table.unpack(item.condition))) then
       local label = item.classicLabel or item.label
       item._sort = string.gsub(label, "(%b^;)", ""):lower()
-      item.label = string.gsub(label, "(%b^;)", iconConfig.colorTags)
+      item.label = string.gsub(label, "(%b^;)", qbConfig.colorTags)
       item.weight = item.weight or 0
       table.insert(items, item)
     end

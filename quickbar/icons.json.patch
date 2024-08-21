@@ -1,24 +1,6 @@
 [
   {
     "op": "add",
-    "path": "/legacyTranslation",
-    "value": {
-      "priority": { "prefix": "^essential;", "weight": -1100 },
-      "admin": { "prefix": "^admin;", "weight": -1000 },
-      "normal": { }
-    }
-  },
-  {
-    "op": "add",
-    "path": "/colorTags",
-    "value": {
-      "^essential;": "^#ffb133;",
-      "^admin;": "^#bf7fff;",
-      "^pat_stardust;": "^#C6C4FF;"
-    }
-  },
-  {
-    "op": "add",
     "path": "/items/metagui:settings/classicLabel",
     "value": "^pat_stardust;Stardust Settings"
   },
