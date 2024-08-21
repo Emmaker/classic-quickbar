@@ -73,21 +73,18 @@ do
     --create widgets
     for _, item in ipairs(itemList) do
       local id = item._id
-      local hide = hiddenIcons[id] or false
       
-      local icon = item.icon
-      local name = item.label
-      local icon_off = icon.."?saturation=-50?brightness=-25"
-      local name_off = "^lightgray;"..string.gsub(name, "(%b^;)", "")
+      item.iconOff = item.icon.."?saturation=-50?brightness=-25"
+      item.labelOff = "^lightgray;"..string.gsub(item.label, "(%b^;)", "")
       
       local listItem = page.iconList:addChild(
         { type = "menuItem", children = {
-          { type = "image", id = id..".image", size = {18, 18}, noAutoCrop = true, file = hide and icon_off or icon },
+          { type = "image", id = id..".icon", size = {18, 18}, noAutoCrop = true },
           {
             {
-              { type = "image", id = id..".hideIcon", file = "/pat/classicquickbar/hidden.png", visible = hide },
+              { type = "image", id = id..".hiddenIcon", file = "/pat/classicquickbar/hidden.png", visible = false },
               0,
-              { type = "label", id = id..".label", text = hide and name_off or name }
+              { type = "label", id = id..".label" }
             },
             { type = "label", id = id..".idlabel", text = id, color = "888" }
           }
@@ -100,21 +97,24 @@ do
           openStardustQB()
         end
       end
-      
-      local image = page[id..".image"]
+
+      local icon = page[id..".icon"]
       local label = page[id..".label"]
-      local hideIcon = page[id..".hideIcon"]
+      local hiddenIcon = page[id..".hiddenIcon"]
+
+      local function setHidden(hide)
+        label:setText(hide and item.labelOff or item.label)
+        icon:setFile(hide and item.iconOff or item.icon)
+        image:queueRedraw()
+        hiddenIcon:setVisible(hide)
+      end
+      setHidden(hiddenIcons[id] or false)
       
       --togglerer
       function listItem:onClick()
         hide = not hide
+        setHidden(hide)
         hiddenIcons[id] = hide or nil
-
-        hideIcon:setVisible(hide)
-        label:setText(hide and name_off or name)
-        image:setFile(hide and icon_off or icon)
-        image:queueRedraw()
-        
         apply.color = "accent"
       end
     end
