@@ -73,7 +73,8 @@ do
     --create widgets
     for _, item in ipairs(itemList) do
       local id = item._id
-      
+
+      item.hidden = hiddenIcons[id] or false
       item.iconOff = item.icon.."?saturation=-50?brightness=-25"
       item.labelOff = "^lightgray;"..string.gsub(item.label, "(%b^;)", "")
       
@@ -105,16 +106,16 @@ do
       local function setHidden(hide)
         label:setText(hide and item.labelOff or item.label)
         icon:setFile(hide and item.iconOff or item.icon)
-        image:queueRedraw()
+        icon:queueRedraw()
         hiddenIcon:setVisible(hide)
       end
-      setHidden(hiddenIcons[id] or false)
+      setHidden(item.hidden)
       
       --togglerer
       function listItem:onClick()
-        hide = not hide
-        setHidden(hide)
-        hiddenIcons[id] = hide or nil
+        item.hidden = not item.hidden
+        setHidden(item.hidden)
+        hiddenIcons[id] = item.hidden or nil
         apply.color = "accent"
       end
     end
