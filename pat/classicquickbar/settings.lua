@@ -26,7 +26,7 @@ do
           4,
           { type = "label", text = strings.hideItems, inline = true, expand = true }
         },
-        { type = "panel", style = "convex", expandMode = {1, 2}, children = {
+        { type = "panel", style = "concave", expandMode = {1, 2}, children = {
           { type = "layout", id = "iconList", mode = "vertical", spacing = 1, children = {} }
         }},
         4,
