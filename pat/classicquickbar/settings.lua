@@ -18,19 +18,17 @@ do
     contents = {
       { type = "scrollArea", children = {
         {
-          2,
           { type = "checkBox", id = "pat_classicEnabled", checked = default(mgui.settings.pat_classicEnabled, true) },
           { type = "label", text = strings.enableClassic, expand = true }
         },
         {
-          2,
           { type = "checkBox", id = "pat_compactQuickbar", checked = default(mgui.settings.pat_compactQuickbar, false) },
           { type = "label", text = strings.enableCompact, expand = true }
         },
         4,
         {
           4,
-          { type = "label", text = strings.hideItems, inline = true, expand = true }
+          { type = "label", text = strings.hideItems }
         },
         { type = "panel", style = "concave", expandMode = {1, 2}, children = {
           { type = "layout", id = "iconList", mode = "vertical", spacing = 1, children = {} }
@@ -48,41 +46,32 @@ do
 
   function page:init()
     local iconConfig = root.assetJson("/quickbar/icons.json")
-    local items = { }
+    local itemList = { }
 
     if iconConfig.items._stardustquickbar then
       iconConfig.items._stardustquickbar.weight = -math.huge
     end
 
-    --translate legacy entries
-    for k, tr in pairs(qbConfig.legacyTranslation) do
-      for _, item in ipairs(iconConfig[k]) do
-        local id = string.format("_legacy.%s:%s", k, item.label)
-        iconConfig.items[id] = {
-          label = (tr.prefix or "")..item.label,
-          icon = item.icon..(tr.directives or ""),
-          weight = math.huge
-        }
-      end
-    end
+    translateLegacyItems(iconConfig, qbConfig.legacyTranslation, function(item, tr)
+      return {
+        label = (tr.prefix or "")..item.label,
+        icon = item.icon,
+        weight = math.huge
+      }
+    end)
     
     --add items
     for k, item in pairs(iconConfig.items) do
       if not item.unhideable then
-        local label = item.classicLabel or item.label
         item._id = k
-        item._sort = string.lower(string.gsub(label, "(%b^;)", ""))
-        item.label = string.gsub(label, "(%b^;)", qbConfig.colorTags)
-        item.icon = item.icon or "/items/currency/essence.png"
-        item.weight = item.weight or 0
-        items[#items + 1] = item
+        addItem(itemList, item, qbConfig.colorTags)
       end
     end
     
-    table.sort(items, function(a, b) return a.weight < b.weight or (a.weight == b.weight and a._sort < b._sort) end)
+    sortItems(itemList)
     
     --create widgets
-    for _, item in ipairs(items) do
+    for _, item in ipairs(itemList) do
       local id = item._id
       local hide = hiddenIcons[id] or false
       

@@ -15,40 +15,32 @@ local function buildList()
 
   local qbConfig = root.assetJson("/pat/classicquickbar/config.json")
   local iconConfig = root.assetJson("/quickbar/icons.json")
-  local items = { }
+  local itemList = { }
   hoverTooltips = { }
 
   local listData = widget.getData("scroll.list") or {}
   tooltipsEnabled = listData.tooltips
 
-  -- translate legacy entries
-  for k, tr in pairs(qbConfig.legacyTranslation) do
-    for _, item in ipairs(iconConfig[k]) do
-      local id = string.format("_legacy.%s:%s", k, item.label)
-      iconConfig.items[id] = {
-        label = (tr.prefix or "")..item.label,
-        icon = item.icon..(tr.directives or ""),
-        weight = tr.weight or 0,
-        action = legacyAction(item)
-      }
-    end
-  end
+  translateLegacyItems(iconConfig, qbConfig.legacyTranslation, function(item, tr)
+    return {
+      label = (tr.prefix or "")..item.label,
+      icon = item.icon,
+      weight = tr.weight or 0,
+      action = legacyAction(item)
+    }
+  end)
   
   local hiddenItems = getMetaguiSetting("pat_hiddenIcons", {})
   
   for k, item in pairs(iconConfig.items) do
     if (item.unhideable or not hiddenItems[k]) and (not item.condition or condition(table.unpack(item.condition))) then
-      local label = item.classicLabel or item.label
-      item._sort = string.gsub(label, "(%b^;)", ""):lower()
-      item.label = string.gsub(label, "(%b^;)", qbConfig.colorTags)
-      item.weight = item.weight or 0
-      table.insert(items, item)
+      addItem(itemList, item, qbConfig.colorTags)
     end
   end
   
-  table.sort(items, function(a, b) return a.weight < b.weight or (a.weight == b.weight and a._sort < b._sort) end)
+  sortItems(itemList)
   
-  for _, item in ipairs(items) do
+  for _, item in ipairs(itemList) do
     addQuickbarItem(item)
   end
 end
@@ -74,7 +66,7 @@ function addQuickbarItem(item)
   widget.registerMemberCallback(container, "click", function() itemCallback(item) end)
   
   local button = container .. "." .. widget.addListItem(container) .. ".button"
-  widget.setButtonOverlayImage(button, item.icon or "/items/currency/essence.png")
+  widget.setButtonOverlayImage(button, item.icon)
 
   hoverTooltips["."..button] = string.format(" %s ", item.label)
 end

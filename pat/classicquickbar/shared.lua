@@ -8,6 +8,28 @@ function getMetaguiSetting(key, default)
   return settings[key]
 end
 
+function translateLegacyItems(iconConfig, translation, func)
+  for k, tr in pairs(translation) do
+    for _, item in ipairs(iconConfig[k]) do
+      local id = string.format("_legacy.%s:%s", k, item.label)
+      iconConfig.items[id] = func(item, tr)
+    end
+  end
+end
+
+function addItem(itemList, item, colorTags)
+  local label = item.classicLabel or item.label
+  item._sort = string.gsub(label, "(%b^;)", ""):lower()
+  item.label = string.gsub(label, "(%b^;)", colorTags or {})
+  item.icon = item.icon or "/items/currency/essence.png"
+  item.weight = item.weight or 0
+  itemList[#itemList + 1] = item
+end
+
+function sortItems(itemList)
+  table.sort(itemList, function(a, b) return a.weight < b.weight or (a.weight == b.weight and a._sort < b._sort) end)
+end
+
 function dismissStardustQB()
   local ipc = shared.metagui_ipc
   if not ipc or not ipc.uniqueByPath then
