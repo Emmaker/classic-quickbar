@@ -17,7 +17,7 @@
         "zlevel": 0,
         "type": "background",
         "fileBody": "/sys/stardust/quickbar/quickbar.bg.png",
-        "fileBody_buttonless": "/pat/classicquickbar/body_buttonless.png"
+        "fileBody_buttonless": "/pat/classicquickbar/images/body_buttonless.png"
       },
       "scroll": {
         "type": "scrollArea",

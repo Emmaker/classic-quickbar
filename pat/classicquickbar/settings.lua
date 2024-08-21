@@ -13,7 +13,7 @@ local strings = root.assetJson("/pat/classicquickbar/config.json:settings")
 local module = settings.module({ weight = 0 })
 local page = module:page({
   title = strings.title,
-  icon = "/pat/classicquickbar/stardustbar.png?border=1;000;0000",
+  icon = "/pat/classicquickbar/images/stardustbar.png?border=1;000;0000",
   contents = {
     { type = "scrollArea", children = {
       {
@@ -35,7 +35,7 @@ local page = module:page({
       4,
       { type = "panel", style = "flat", expandMode = {1, 0}, children = {
         { type = "label", text = strings.scungus },
-        { type = "image", file = "/pat/classicquickbar/scungus.png", scale = 0.25 }
+        { type = "image", file = "/pat/classicquickbar/images/scungus.png", scale = 0.25 }
       }}
     }}
   }
@@ -56,7 +56,7 @@ function page:init()
         { type = "image", id = id..".icon", size = {18, 18}, noAutoCrop = true },
         {
           {
-            { type = "image", id = id..".hidden", file = "/pat/classicquickbar/hidden.png", visible = false },
+            { type = "image", id = id..".hidden", file = "/pat/classicquickbar/images/hidden.png", visible = false },
             0,
             { type = "label", id = id..".label" }
           },

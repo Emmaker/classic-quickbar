@@ -19,7 +19,7 @@
     "path": "/items/_stardustquickbar",
     "value": {
       "label": "^pat_stardust;Stardust Quickbar",
-      "icon": "/pat/classicquickbar/stardustbar.png",
+      "icon": "/pat/classicquickbar/images/stardustbar.png",
       "weight": -10000,
       "dismissQuickbar": true,
       "defaultHidden": true,
