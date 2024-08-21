@@ -19,6 +19,11 @@ do
       { type = "scrollArea", children = {
         {
           2,
+          { type = "checkBox", id = "pat_classicEnabled", checked = default(mgui.settings.pat_classicEnabled, true) },
+          { type = "label", text = strings.enableClassic, expand = true }
+        },
+        {
+          2,
           { type = "checkBox", id = "pat_compactQuickbar", checked = default(mgui.settings.pat_compactQuickbar, false) },
           { type = "label", text = strings.enableCompact, expand = true }
         },
@@ -127,6 +132,17 @@ do
   end
 
   function page:save()
+    local classicChecked = page.pat_classicEnabled.checked
+    if mgui.settings.pat_classicEnabled ~= classicChecked then
+      mgui.settings.pat_classicEnabled = classicChecked
+      metagui.startEvent(function()
+        if dismissQuickbar() then
+          util.wait(0.02)
+          openQuickbar()
+        end
+      end)
+    end
+
     mgui.settings.pat_compactQuickbar = page.pat_compactQuickbar.checked
     mgui.settings.pat_hiddenIcons = hiddenIcons
     

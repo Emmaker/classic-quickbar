@@ -80,6 +80,10 @@ function addQuickbarItem(item)
 end
 
 function init()
+  if not getMetaguiSetting("pat_classicEnabled", true) and openStardustQB() then
+    return pane.dismiss()
+  end
+
   if dismissStardustQB() or dismissClassicQB() then
     return pane.dismiss()
   end

@@ -1,6 +1,7 @@
 {
   "settings": {
     "title": "Classic Quickbar",
+    "enableClassic": "Enable Classic Quickbar",
     "enableCompact": "Compact mode",
     "hideItems": "Click items to hide / unhide them:",
     "openStardustQuickbar": "Open",

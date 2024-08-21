@@ -8,7 +8,7 @@ function init()
 
   function update(dt)
     if input.bindDown("pat_classicquickbar", "open") then
-      openClassicQB()
+      openQuickbar()
     end
   end
 end

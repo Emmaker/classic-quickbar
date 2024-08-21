@@ -51,3 +51,15 @@ function openClassicQB()
 
   return true
 end
+
+function openQuickbar()
+  if getMetaguiSetting("pat_classicEnabled", true) then
+    return openClassicQB()
+  else
+    return openStardustQB()
+  end
+end
+
+function dismissQuickbar()
+  return dismissClassicQB() or dismissStardustQB()
+end
