@@ -45,7 +45,7 @@ local function getHiddenItems(itemTable)
 end
 
 function getQuickbarItems(filter)
-  local qbConfig = root.assetJson("/pat/classicquickbar/config.json")
+  local qbConfig = root.assetJson("/pat/classicquickbar/classicquickbar.json")
   local iconConfig = root.assetJson("/quickbar/icons.json")
   local hiddenItems = getHiddenItems(iconConfig.items)
   local itemList = { }

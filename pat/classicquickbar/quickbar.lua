@@ -1,4 +1,4 @@
-require "/pat/classicquickbar/shared.lua"
+require "/pat/classicquickbar/util.lua"
 require "/pat/classicquickbar/actions.lua"
 require "/sys/quickbar/conditions.lua"
 conditions.pat_classicQuickbar = function() return true end
