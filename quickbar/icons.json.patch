@@ -24,7 +24,11 @@
       "dismissQuickbar": true,
       "defaultHidden": true,
       "action": [ "ui", "quickbar:quickbar" ],
-      "condition": [ "pat_classicQuickbar" ]
+      "condition": [ "pat_classicQuickbar" ],
+      "settingsButton": {
+        "caption": "Open",
+        "action": [ "_openStardustQuickbar" ]
+      }
     }
   }
 ]

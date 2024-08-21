@@ -1,4 +1,7 @@
 require "/pat/classicquickbar/shared.lua"
+require "/pat/classicquickbar/actions.lua"
+
+actions._openStardustQuickbar = openStardustQB
 
 local function default(v, d)
   if v == nil then return d end
@@ -62,10 +65,10 @@ function page:init()
       }}
     )
     
-    if id == "_stardustquickbar" then
-      button:addChild({ type = "button", id = "pat_openStardustQuickbar", caption = strings.openStardustQuickbar, inline = true, size = 48 })
-      function self.pat_openStardustQuickbar:onClick()
-        openStardustQB()
+    if item.settingsButton then
+      local b = button:addChild({ type = "button", id = id..".button", caption = item.settingsButton.caption, inline = true, size = 48 })
+      function b:onClick()
+        action(table.unpack(item.settingsButton.action))
       end
     end
 
