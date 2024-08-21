@@ -17,6 +17,7 @@
       "icon": "/pat/classicquickbar/stardustbar.png",
       "weight": 1000,
       "dismissQuickbar": true,
+      "defaultHidden": true,
       "action": [ "ui", "quickbar:quickbar" ],
       "condition": [ "pat_classicQuickbar" ]
     }

@@ -42,8 +42,6 @@ do
     }
   })
 
-  local hiddenIcons = default(mgui.settings.pat_hiddenIcons, {})
-
   function page:init()
     local iconConfig = root.assetJson("/quickbar/icons.json")
     local itemList = { }
@@ -59,6 +57,8 @@ do
         weight = math.huge
       }
     end)
+
+    self.hiddenIcons = getHiddenItems(iconConfig.items)
     
     --add items
     for k, item in pairs(iconConfig.items) do
@@ -74,7 +74,7 @@ do
     for _, item in ipairs(itemList) do
       local id = item._id
 
-      item.hidden = hiddenIcons[id] or false
+      item.hidden = self.hiddenIcons[id] or false
       item.iconOff = item.icon.."?saturation=-50?brightness=-25"
       item.labelOff = "^lightgray;"..string.gsub(item.label, "(%b^;)", "")
       
@@ -115,7 +115,7 @@ do
       function listItem:onClick()
         item.hidden = not item.hidden
         setHidden(item.hidden)
-        hiddenIcons[id] = item.hidden or nil
+        page.hiddenIcons[id] = item.hidden or nil
         apply.color = "accent"
       end
     end
@@ -140,7 +140,7 @@ do
 
   function page:save()
     local s = mgui.settings
-    s.pat_hiddenIcons = hiddenIcons
+    s.pat_hiddenIcons = self.hiddenIcons
     s.pat_compactQuickbar = page.pat_compactQuickbar.checked
 
     local classicCheck = page.pat_classicEnabled.checked

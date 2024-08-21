@@ -30,7 +30,7 @@ local function buildList()
     }
   end)
   
-  local hiddenItems = getMetaguiSetting("pat_hiddenIcons", {})
+  local hiddenItems = getHiddenItems(iconConfig.items)
   
   for k, item in pairs(iconConfig.items) do
     if (item.unhideable or not hiddenItems[k]) and (not item.condition or condition(table.unpack(item.condition))) then

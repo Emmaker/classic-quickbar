@@ -17,6 +17,21 @@ function translateLegacyItems(iconConfig, translation, func)
   end
 end
 
+function getHiddenItems(itemTable)
+  local hidden = getMetaguiSetting("pat_hiddenIcons", nil)
+
+  if not hidden and itemTable then
+    hidden = {}
+    for k, item in pairs(itemTable) do
+      if item.defaultHidden then
+        hidden[k] = true
+      end
+    end
+  end
+
+  return hidden or {}
+end
+
 function addItem(itemList, item, colorTags)
   local label = item.classicLabel or item.label
   item._sort = string.gsub(label, "(%b^;)", ""):lower()
@@ -29,6 +44,7 @@ end
 function sortItems(itemList)
   table.sort(itemList, function(a, b) return a.weight < b.weight or (a.weight == b.weight and a._sort < b._sort) end)
 end
+
 
 function dismissStardustQB()
   local ipc = shared.metagui_ipc
