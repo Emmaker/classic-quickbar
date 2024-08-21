@@ -1,0 +1,7 @@
+[
+  {
+    "op": "add",
+    "path": "/genericScriptContexts/pat_classicquickbar",
+    "value": "/pat/classicquickbar/binds.lua"
+  }
+]

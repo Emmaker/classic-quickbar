@@ -1,0 +1,11 @@
+{
+  "pat_classicquickbar": {
+    "name": "^#C6C4FF;Classic Quickbar^reset;",
+    "binds": {
+      "open": {
+        "default": [ ],
+        "name": "Open Quickbar"
+      }
+    }
+  }
+}
