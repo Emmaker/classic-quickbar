@@ -28,7 +28,7 @@ end
 
 local function translateLegacyItems(iconConfig, translation)
   for k, tr in pairs(translation) do
-    for _, item in ipairs(iconConfig[k]) do
+    for _, item in ipairs(iconConfig[k] or {}) do
       local id = string.format("_legacy.%s:%s", k, item.label)
       iconConfig.items[id] = {
         label = (tr.prefix or "")..item.label,

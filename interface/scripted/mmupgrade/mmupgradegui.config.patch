@@ -1,144 +1,149 @@
 [
-  { "op": "add", "path": "/pat_classicQuickbar", "value": true },
-  { "op": "replace", "path": "/scripts", "value": [ "/pat/classicquickbar/quickbar.lua" ] },
-  { "op": "remove", "path": "/config" },
-  {
-    "op": "replace",
-    "path": "/gui",
-    "value": {
-      "panefeature": {
-        "type": "panefeature",
-        "anchor": "topRight",
-        "offset": [ -24, -47 ],
-        "keyDismissable": false,
-        "positionLocked": true
-      },
-      "background": {
-        "zlevel": 0,
-        "type": "background",
-        "fileBody": "/sys/stardust/quickbar/quickbar.bg.png",
-        "fileBody_buttonless": "/pat/classicquickbar/images/body_buttonless.png"
-      },
-      "scroll": {
-        "type": "scrollArea",
-        "rect": [ 4, 4, 134, 202 ],
-        "scissoring": true,
-        "buttons": {
-          "horizontal": {
-            "forward": { "base": "", "hover": "", "pressed": "" },
-            "backward": { "base": "", "hover": "", "pressed": "" }
-          },
-          "vertical": {
-            "forward": { "base": "/sys/stardust/quickbar/null.png?scalenearest=0;0", "hover": "", "pressed": "" },
-            "backward": { "base": "/sys/stardust/quickbar/null.png?scalenearest=0;0", "hover": "", "pressed": "" }
-          }
+  [
+    { "op": "test", "path": "/config" },
+    { "op": "remove", "path": "/config" }
+  ],
+  [
+    { "op": "add", "path": "/pat_classicQuickbar", "value": true },
+    { "op": "add", "path": "/scripts", "value": [ "/pat/classicquickbar/quickbar.lua" ] },
+    {
+      "op": "add",
+      "path": "/gui",
+      "value": {
+        "panefeature": {
+          "type": "panefeature",
+          "anchor": "topRight",
+          "offset": [ -24, -47 ],
+          "keyDismissable": false,
+          "positionLocked": true
         },
-        "thumbs": {
-          "horizontal": {
-            "base": { "begin": "", "end": "", "inner": "" },
-            "hover": { "begin": "", "end": "", "inner": "" },
-            "pressed": { "begin": "", "end": "", "inner": "" }
+        "background": {
+          "zlevel": 0,
+          "type": "background",
+          "fileBody": "/sys/stardust/quickbar/quickbar.bg.png",
+          "fileBody_buttonless": "/pat/classicquickbar/images/body_buttonless.png"
+        },
+        "scroll": {
+          "type": "scrollArea",
+          "rect": [ 4, 4, 134, 202 ],
+          "scissoring": true,
+          "buttons": {
+            "horizontal": {
+              "forward": { "base": "", "hover": "", "pressed": "" },
+              "backward": { "base": "", "hover": "", "pressed": "" }
+            },
+            "vertical": {
+              "forward": { "base": "/sys/stardust/quickbar/null.png?scalenearest=0;0", "hover": "", "pressed": "" },
+              "backward": { "base": "/sys/stardust/quickbar/null.png?scalenearest=0;0", "hover": "", "pressed": "" }
+            }
           },
-          "vertical": {
-            "base": {
-              "begin": "/sys/stardust/quickbar/scrollbar.png:2",
-              "end": "/sys/stardust/quickbar/scrollbar.png:0",
-              "inner": "/sys/stardust/quickbar/scrollbar.png:1"
+          "thumbs": {
+            "horizontal": {
+              "base": { "begin": "", "end": "", "inner": "" },
+              "hover": { "begin": "", "end": "", "inner": "" },
+              "pressed": { "begin": "", "end": "", "inner": "" }
             },
-            "hover": {
-              "begin": "/sys/stardust/quickbar/scrollbar.png:2",
-              "end": "/sys/stardust/quickbar/scrollbar.png:0",
-              "inner": "/sys/stardust/quickbar/scrollbar.png:1"
-            },
-            "pressed": {
-              "begin": "/sys/stardust/quickbar/scrollbar.png:2",
-              "end": "/sys/stardust/quickbar/scrollbar.png:0",
-              "inner": "/sys/stardust/quickbar/scrollbar.png:1"
+            "vertical": {
+              "base": {
+                "begin": "/sys/stardust/quickbar/scrollbar.png:2",
+                "end": "/sys/stardust/quickbar/scrollbar.png:0",
+                "inner": "/sys/stardust/quickbar/scrollbar.png:1"
+              },
+              "hover": {
+                "begin": "/sys/stardust/quickbar/scrollbar.png:2",
+                "end": "/sys/stardust/quickbar/scrollbar.png:0",
+                "inner": "/sys/stardust/quickbar/scrollbar.png:1"
+              },
+              "pressed": {
+                "begin": "/sys/stardust/quickbar/scrollbar.png:2",
+                "end": "/sys/stardust/quickbar/scrollbar.png:0",
+                "inner": "/sys/stardust/quickbar/scrollbar.png:1"
+              }
+            }
+          },
+          "children": { }
+        }
+      }
+    },
+    {
+      "op": "add",
+      "path": "/listWidgets",
+      "value": {
+        "default": {
+          "type": "list",
+          "scissoring": false,
+          "fillDown": true,
+          "schema": {
+            "spacing": [ 0, 0 ],
+            "memberSize": [ 132, 20 ],
+            "listTemplate": {
+              "label": {
+                "type": "label",
+                "position": [ 104, 11 ],
+                "hAnchor": "right",
+                "vAnchor": "mid",
+                "wrapWidth": 102,
+                "value": "Item Label"
+              },
+              "buttonContainer": {
+                "type": "list",
+                "position": [ 105, 2 ],
+                "scissoring": false,
+                "schema": {
+                  "spacing": [ 0, 0 ],
+                  "memberSize": [ 18, 18 ],
+                  "listTemplate": {
+                    "button": {
+                      "type": "button",
+                      "position": [ 0, 0 ],
+                      "pressedOffset": [ 0, 0 ],
+                      "base": "/sys/stardust/quickbar/button.idle.png",
+                      "hover": "/sys/stardust/quickbar/button.hover.png",
+                      "pressed": "/sys/stardust/quickbar/button.idle.png",
+                      "callback": "click"
+                    }
+                  }
+                }
+              }
             }
           }
         },
-        "children": { }
-      }
-    }
-  },
-  {
-    "op": "add",
-    "path": "/listWidgets",
-    "value": {
-      "default": {
-        "type": "list",
-        "scissoring": false,
-        "fillDown": true,
-        "schema": {
-          "spacing": [ 0, 0 ],
-          "memberSize": [ 132, 20 ],
-          "listTemplate": {
-            "label": {
-              "type": "label",
-              "position": [ 104, 11 ],
-              "hAnchor": "right",
-              "vAnchor": "mid",
-              "wrapWidth": 102,
-              "value": "Item Label"
-            },
-            "buttonContainer": {
-              "type": "list",
-              "position": [ 105, 2 ],
-              "scissoring": false,
-              "schema": {
-                "spacing": [ 0, 0 ],
-                "memberSize": [ 18, 18 ],
-                "listTemplate": {
-                  "button": {
-                    "type": "button",
-                    "position": [ 0, 0 ],
-                    "pressedOffset": [ 0, 0 ],
-                    "base": "/sys/stardust/quickbar/button.idle.png",
-                    "hover": "/sys/stardust/quickbar/button.hover.png",
-                    "pressed": "/sys/stardust/quickbar/button.idle.png",
-                    "callback": "click"
+        "compact": {
+          "type": "list",
+          "scissoring": false,
+          "fillDown": true,
+          "columns": 6,
+          "data": {
+            "tooltips": true
+          },
+          "schema": {
+            "spacing": [ 0, 0 ],
+            "memberSize": [ 20, 20 ],
+            "listTemplate": {
+              "buttonContainer": {
+                "type": "list",
+                "position": [ 2, 2 ],
+                "scissoring": false,
+                "schema": {
+                  "spacing": [ 0, 0 ],
+                  "memberSize": [ 18, 18 ],
+                  "listTemplate": {
+                    "button": {
+                      "type": "button",
+                      "position": [ 0, 0 ],
+                      "pressedOffset": [ 0, 0 ],
+                      "base": "/sys/stardust/quickbar/button.idle.png",
+                      "hover": "/sys/stardust/quickbar/button.hover.png",
+                      "pressed": "/sys/stardust/quickbar/button.idle.png",
+                      "callback": "click"
+                    }
                   }
                 }
               }
             }
           }
         }
-      },
-      "compact": {
-        "type": "list",
-        "scissoring": false,
-        "fillDown": true,
-        "columns": 6,
-        "data": {
-          "tooltips": true
-        },
-        "schema": {
-          "spacing": [ 0, 0 ],
-          "memberSize": [ 20, 20 ],
-          "listTemplate": {
-            "buttonContainer": {
-              "type": "list",
-              "position": [ 2, 2 ],
-              "scissoring": false,
-              "schema": {
-                "spacing": [ 0, 0 ],
-                "memberSize": [ 18, 18 ],
-                "listTemplate": {
-                  "button": {
-                    "type": "button",
-                    "position": [ 0, 0 ],
-                    "pressedOffset": [ 0, 0 ],
-                    "base": "/sys/stardust/quickbar/button.idle.png",
-                    "hover": "/sys/stardust/quickbar/button.hover.png",
-                    "pressed": "/sys/stardust/quickbar/button.idle.png",
-                    "callback": "click"
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     }
-  }
+  ]
 ]
