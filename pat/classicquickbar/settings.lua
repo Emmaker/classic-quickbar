@@ -103,10 +103,7 @@ end
 
 local function rebuildQbList()
   coroutine.yield()
-  local shared = getmetatable''
-  if shared.pat_classicqb_rebuild then
-    shared.pat_classicqb_rebuild()
-  end
+  rebuildClassicQB()
 end
 
 local function reopenQb()

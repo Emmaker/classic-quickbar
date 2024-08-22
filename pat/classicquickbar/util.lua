@@ -2,10 +2,19 @@ local shared = getmetatable''
 
 function getMetaguiSetting(key, default)
   local settings = player.getProperty("metagui:settings") or {}
+  if not key then
+    return settings
+  end
+
   if settings[key] == nil then
     return default
   end
   return settings[key]
+end
+
+function setMetaguiSetting(key, value)
+  local settings = getMetaguiSetting()
+  settings[key] = value
 end
 
 local function translateLegacyAction(item)
@@ -127,4 +136,11 @@ end
 
 function dismissQuickbar()
   return dismissClassicQB() or dismissStardustQB()
+end
+
+function rebuildClassicQB()
+  if shared.pat_classicqb_rebuild then
+    shared.pat_classicqb_rebuild()
+    return true
+  end
 end
