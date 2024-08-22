@@ -1,5 +1,12 @@
+require "/pat/classicquickbar/util.lua"
 actions = {}
 qbActions = actions -- alias for compatibility
+
+local function nullfunc() end
+function action(id, ...)
+  return (actions[id] or nullfunc)(...)
+end
+
 
 function actions.pane(cfg)
   if type(cfg) ~= "table" then cfg = { config = cfg } end
@@ -25,8 +32,12 @@ function actions._legacy_module(s)
   module[e]() module = nil -- run function and clean up
 end
 
-local function nullfunc() end
+function actions.sail()
+  player.interact("OpenAiInterface")
+end
 
-function action(id, ...)
-  return (actions[id] or nullfunc)(...)
+function actions.changeMode()
+  local compact = getMetaguiSetting("pat_compactQuickbar", false)
+  setMetaguiSetting("pat_compactQuickbar", not compact)
+  rebuildClassicQB()
 end
