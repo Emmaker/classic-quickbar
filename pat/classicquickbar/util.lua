@@ -54,10 +54,11 @@ function getQuickbarItems(filter)
 
   for k, item in pairs(iconConfig.items) do
     if not filter or filter(item, hiddenItems[k]) then
-      item._id = k
-      item._hidden = hiddenItems[k] or false
-      item._sort = string.gsub(item.label, "(%b^;)", ""):lower()
+      item.id = k
+      item.hidden = hiddenItems[k] or false
       item.label = string.gsub(item.label, "(%b^;)", qbConfig.colorTags)
+      item.uncoloredLabel = string.gsub(item.label, "(%b^;)", "")
+      item._sort = item.uncoloredLabel:lower()
       item.icon = item.icon or "/items/currency/essence.png"
       item.weight = item.weight or 0
       itemList[#itemList + 1] = item

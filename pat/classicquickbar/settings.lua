@@ -8,12 +8,13 @@ local function default(v, d)
   return v
 end
 
-local strings = root.assetJson("/pat/classicquickbar/config.json:settings")
+local qbConfig = root.assetJson("/pat/classicquickbar/classicquickbar.json:settings")
+local strings, images = qbConfig.strings, qbConfig.images
 
 local module = settings.module({ weight = 0 })
 local page = module:page({
   title = strings.title,
-  icon = "/pat/classicquickbar/images/stardustbar.png?border=1;000;0000",
+  icon = images.pageIcon,
   contents = {
     { type = "scrollArea", children = {
       {
@@ -35,7 +36,7 @@ local page = module:page({
       4,
       { type = "panel", style = "flat", expandMode = {1, 0}, children = {
         { type = "label", text = strings.scungus },
-        { type = "image", file = "/pat/classicquickbar/images/scungus.png", scale = 0.25 }
+        { type = "image", file = images.scungus, scale = 0.25 }
       }}
     }}
   }
@@ -49,14 +50,14 @@ function page:init()
 
   --create widgets
   for _, item in ipairs(itemList) do
-    local id = item._id
+    local id = item.id
     
     local button = self.iconList:addChild(
       { type = "menuItem", children = {
         { type = "image", id = id..".icon", size = {18, 18}, noAutoCrop = true },
         {
           {
-            { type = "image", id = id..".hidden", file = "/pat/classicquickbar/images/hidden.png", visible = false },
+            { type = "image", id = id..".hidden", file = images.hiddenIcon, visible = false },
             0,
             { type = "label", id = id..".label" }
           },
@@ -76,8 +77,8 @@ function page:init()
     local icon = self[id..".icon"]
     local hideIcon = self[id..".hidden"]
 
-    local labelOff = "^lightgray;"..string.gsub(item.label, "(%b^;)", "")
-    local iconOff = item.icon.."?saturation=-50?brightness=-25"
+    local labelOff = string.format(strings.hideFormat, item.uncoloredLabel)
+    local iconOff = string.format(images.hideDirectives, item.icon)
 
     local function setHidden(hide)
       label:setText(hide and labelOff or item.label)
@@ -86,11 +87,11 @@ function page:init()
       hideIcon:setVisible(hide or false)
     end
 
-    setHidden(item._hidden)
+    setHidden(item.hidden)
 
     function button:onClick()
-      local hide = not item._hidden
-      item._hidden = hide
+      local hide = not item.hidden
+      item.hidden = hide
       hiddenItems[id] = hide or nil
       setHidden(hide)
 

@@ -1,10 +1,19 @@
 {
   "settings": {
-    "title": "Classic Quickbar",
-    "enableClassic": "Enable Classic Quickbar",
-    "enableCompact": "Compact mode",
-    "hideItems": "Click items to hide / unhide them:",
-    "scungus": "this is scungus :)      he HATES metagui"
+    "strings": {
+      "title": "Classic Quickbar",
+      "enableClassic": "Enable Classic Quickbar",
+      "enableCompact": "Compact mode",
+      "hideItems": "Click items to hide / unhide them:",
+      "scungus": "this is scungus :)      he HATES metagui",
+      "hideFormat": "^lightgray;%s"
+    },
+    "images": {
+      "pageIcon": "/pat/classicquickbar/images/stardustbar.png?border=1;000;0000",
+      "scungus": "/pat/classicquickbar/images/scungus.png",
+      "hiddenIcon": "/pat/classicquickbar/images/hidden.png",
+      "hideDirectives": "%s?saturation=-50?brightness=-25"
+    }
   },
   "legacyTranslation": {
     "priority": { "prefix": "^essential;", "weight": -1100 },
