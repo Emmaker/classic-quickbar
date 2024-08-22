@@ -9,8 +9,10 @@ restores the original (non-metagui) Quickbar while supporting newer versions & f
 ## features :
 - The original quickbar !
 - Can still open MetaGUI windows
+- More conditions
 - Togglable compact mode
 - Icons can be hidden
+- The text wrapping no longer sucks
 - Can be opened with a keybind (requires StarExtensions or OpenStarbound)
 - the entire mod can be disabled if you want to do that for some reason
 
