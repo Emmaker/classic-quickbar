@@ -21,6 +21,7 @@ end
 local function translateLegacyAction(item)
   if item.pane then return { "pane", item.pane } end
   if item.scriptAction then
+    sb.logInfo(string.format("Quickbar item '%s': scriptAction is deprecated, please use new entry format", item.label))
     return { "_legacy_module", item.scriptAction }
   end
   return { "null" }
