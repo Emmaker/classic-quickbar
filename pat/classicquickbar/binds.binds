@@ -5,6 +5,10 @@
       "open": {
         "default": [ ],
         "name": "Open Quickbar"
+      },
+      "settings": {
+        "default": [ ],
+        "name": "Open Stardust Settings"
       }
     }
   }
