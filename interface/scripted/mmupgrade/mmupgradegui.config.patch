@@ -113,9 +113,7 @@
           "scissoring": false,
           "fillDown": true,
           "columns": 6,
-          "data": {
-            "tooltips": true
-          },
+          "tooltips": true,
           "schema": {
             "spacing": [ 0, 0 ],
             "memberSize": [ 20, 20 ],

@@ -13,9 +13,7 @@ local function buildList()
   widget.removeChild("scroll", "list")
   widget.addChild("scroll", listConfig, "list")
 
-  local listData = widget.getData("scroll.list") or {}
-  tooltipsEnabled = listData.tooltips
-
+  tooltipsEnabled = listConfig.tooltips
   hoverTooltips = { }
 
   local itemList = getQuickbarItems(function(item, hidden)
