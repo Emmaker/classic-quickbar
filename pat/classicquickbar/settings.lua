@@ -18,11 +18,11 @@ local page = module:page({
   contents = {
     { type = "scrollArea", children = {
       {
-        { type = "checkBox", id = "pat_classicEnabled", checked = default(metagui.settings.pat_classicEnabled, true) },
+        { type = "checkBox", id = "classicQbCheckbox", checked = default(metagui.settings.pat_classicEnabled, true) },
         { type = "label", text = strings.enableClassic, expand = true }
       },
       {
-        { type = "checkBox", id = "pat_compactQuickbar", checked = default(metagui.settings.pat_compactQuickbar, false) },
+        { type = "checkBox", id = "compactQbCheckbox", checked = default(metagui.settings.pat_compactQuickbar, false) },
         { type = "label", text = strings.enableCompact, expand = true }
       },
       4,
@@ -117,11 +117,11 @@ end
 function page:save()
   local s = metagui.settings
   s.pat_hiddenIcons = self.hiddenItems
-  s.pat_compactQuickbar = self.pat_compactQuickbar.checked
+  s.pat_compactQuickbar = self.compactQbCheckbox.checked
 
-  local classicCheck = self.pat_classicEnabled.checked
-  if s.pat_classicEnabled ~= classicCheck then
-    s.pat_classicEnabled = classicCheck
+  local classicChecked = self.classicQbCheckbox.checked
+  if s.pat_classicEnabled ~= classicChecked then
+    s.pat_classicEnabled = classicChecked
     metagui.startEvent(reopenQb)
   else
     metagui.startEvent(rebuildQbList)
