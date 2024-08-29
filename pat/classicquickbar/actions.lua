@@ -42,3 +42,8 @@ function actions.changeMode()
   setMetaguiSetting("pat_compactQuickbar", not compact)
   rebuildClassicQB()
 end
+
+function actions.teleport(cfg)
+  if type(cfg) ~= "string" then return end
+  player.interact("OpenTeleportDialog", cfg)
+end
