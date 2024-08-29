@@ -2,9 +2,10 @@ require "/pat/classicquickbar/util.lua"
 actions = {}
 qbActions = actions -- alias for compatibility
 
-local function nullfunc() end
 function action(id, ...)
-  return (actions[id] or nullfunc)(...)
+  if actions[id] then
+    return actions[id](...)
+  end
 end
 
 
