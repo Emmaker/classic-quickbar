@@ -21,16 +21,18 @@ end
 function actions.exec(script, ...)
   if type(script) ~= "string" then return nil end
   params = {...} -- pass any given parameters to the script
-  _SBLOADED[script] = nil require(script) -- force execute every time
-  params = nil -- clear afterwards for cleanliness
+  _SBLOADED[script] = nil
+  require(script)
+  params = nil
 end
 
-function actions._legacy_module(s)
-  local m, e = (function() local it = string.gmatch(s, "[^:]+") return it(), it() end)()
-  local mf = string.format("/quickbar/%s.lua", m)
+function actions._legacy_module(script, action)
+  if type(script) ~= "string" or type(action) ~= "string" then return nil end
   module = { }
-  _SBLOADED[mf] = nil require(mf) -- force execute
-  module[e]() module = nil -- run function and clean up
+  _SBLOADED[script] = nil
+  require(script)
+  if module[action] then module[action]() end
+  module = nil
 end
 
 function actions.sail()

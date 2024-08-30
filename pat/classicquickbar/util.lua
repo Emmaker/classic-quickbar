@@ -20,10 +20,17 @@ end
 
 local function translateLegacyAction(item)
   if item.pane then return { "pane", item.pane } end
+
   if item.scriptAction then
     sb.logInfo(string.format("Quickbar item '%s': scriptAction is deprecated, please use new entry format", item.label))
-    return { "_legacy_module", item.scriptAction }
+
+    local match = string.gmatch(item.scriptAction, "[^:]+")
+    local name, action = match(), match()
+    local script = string.format("/quickbar/%s.lua", name)
+
+    return { "_legacy_module", script, action }
   end
+  
   return { "null" }
 end
 
