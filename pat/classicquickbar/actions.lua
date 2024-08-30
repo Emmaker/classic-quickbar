@@ -1,5 +1,5 @@
 require "/pat/classicquickbar/util.lua"
-actions = {}
+actions = actions or {}
 qbActions = actions -- alias for compatibility
 
 function action(id, ...)
