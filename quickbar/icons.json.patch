@@ -1,16 +1,7 @@
 [
-  [
-    { "op": "test", "path": "/priority", "inverse": true },
-    { "op": "add", "path": "/priority", "value": [ ] }
-  ],
-  [
-    { "op": "test", "path": "/admin", "inverse": true },
-    { "op": "add", "path": "/admin", "value": [ ] }
-  ],
-  [
-    { "op": "test", "path": "/normal", "inverse": true },
-    { "op": "add", "path": "/normal", "value": [ ] }
-  ],
+  [ { "op": "test", "path": "/priority", "inverse": true }, { "op": "add", "path": "/priority", "value": [ ] } ],
+  [ { "op": "test", "path": "/admin", "inverse": true }, { "op": "add", "path": "/admin", "value": [ ] } ],
+  [ { "op": "test", "path": "/normal", "inverse": true }, { "op": "add", "path": "/normal", "value": [ ] } ],
   [
     { "op": "test", "path": "/items/metagui:settings", "inverse": true },
     {
@@ -23,21 +14,9 @@
     }
   ],
   [
-    {
-      "op": "add",
-      "path": "/items/metagui:settings/label",
-      "value": "^pat_stardust;Stardust Settings"
-    },
-    {
-      "op": "add",
-      "path": "/items/metagui:settings/weight",
-      "value": -10001
-    },
-    {
-      "op": "add",
-      "path": "/items/metagui:settings/unhideable",
-      "value": true
-    },
+    { "op": "add", "path": "/items/metagui:settings/label", "value": "^pat_stardust;Stardust Settings" },
+    { "op": "add", "path": "/items/metagui:settings/weight", "value": -10001 },
+    { "op": "add", "path": "/items/metagui:settings/unhideable", "value": true },
     {
       "op": "add",
       "path": "/items/_stardustquickbar",
