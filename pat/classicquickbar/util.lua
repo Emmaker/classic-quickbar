@@ -42,7 +42,8 @@ local function translateLegacyItems(iconConfig, translation)
         label = (tr.prefix or "")..item.label,
         icon = item.icon,
         weight = tr.weight or 0,
-        action = translateLegacyAction(item)
+        action = translateLegacyAction(item),
+        condition = tr.condition
       }
     end
   end

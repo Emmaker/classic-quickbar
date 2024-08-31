@@ -17,7 +17,7 @@
   },
   "legacyTranslation": {
     "priority": { "prefix": "^essential;", "weight": -1100 },
-    "admin": { "prefix": "^admin;", "weight": -1000 },
+    "admin": { "prefix": "^admin;", "weight": -1000, "condition": [ "admin" ] },
     "normal": { }
   },
   "colorTags": {
