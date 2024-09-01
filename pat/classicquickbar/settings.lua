@@ -43,7 +43,7 @@ local page = module:page({
 })
 
 function page:init()
-  local itemList, hiddenItems = getQuickbarItems(function(item, hidden)
+  local itemList, hiddenItems = getQuickbarItems(function(item)
     return not item.unhideable
   end)
   self.hiddenItems = hiddenItems

@@ -16,8 +16,8 @@ local function buildList()
   tooltipsEnabled = listConfig.tooltips
   hoverTooltips = { }
 
-  local itemList = getQuickbarItems(function(item, hidden)
-    if not item.unhideable and hidden then
+  local itemList = getQuickbarItems(function(item)
+    if not item.unhideable and item.hidden then
       return false
     end
     return not item.condition or condition(table.unpack(item.condition))

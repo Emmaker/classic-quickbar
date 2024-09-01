@@ -71,14 +71,14 @@ function getQuickbarItems(filter)
   translateLegacyItems(iconConfig, qbConfig.legacyTranslation)
 
   for k, item in pairs(iconConfig.items) do
-    if not filter or filter(item, hiddenItems[k]) then
-      item.id = k
-      item.hidden = hiddenItems[k] or false
+    item.id = k
+    item.hidden = hiddenItems[k] or false
+    if not filter or filter(item) then
       item.uncoloredLabel = string.gsub(item.label, "(%b^;)", "")
       item.label = string.gsub(item.label, "(%b^;)", qbConfig.colorTags)
-      item._sort = item.uncoloredLabel:lower()
       item.icon = item.icon or qbConfig.defaultImages.icon
       item.weight = item.weight or 0
+      item._sort = item.uncoloredLabel:lower()
 
       if item.buttonImages then
         local set = item.buttonImages
