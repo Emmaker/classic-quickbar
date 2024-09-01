@@ -51,6 +51,13 @@ function addQuickbarButton(item)
   local button = container .. "." .. widget.addListItem(container) .. ".button"
   widget.setButtonOverlayImage(button, item.icon)
 
+  if item.buttonImages then
+    local set = item.buttonImages
+    set.hover = set.hover or set.base.."?brightness=30"
+    set.pressed = set.pressed or set.base
+    widget.setButtonImages(button, set)
+  end
+
   hoverTooltips["." .. button] = string.format(" %s ", item.label)
 end
 
