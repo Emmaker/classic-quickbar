@@ -77,8 +77,15 @@ function getQuickbarItems(filter)
       item.uncoloredLabel = string.gsub(item.label, "(%b^;)", "")
       item.label = string.gsub(item.label, "(%b^;)", qbConfig.colorTags)
       item._sort = item.uncoloredLabel:lower()
-      item.icon = item.icon or "/items/currency/essence.png"
+      item.icon = item.icon or qbConfig.defaultImages.icon
       item.weight = item.weight or 0
+
+      if item.buttonImages then
+        local set = item.buttonImages
+        set.hover = set.hover or string.format(qbConfig.defaultImages.hover, set.base)
+        set.pressed = set.pressed or string.format(qbConfig.defaultImages.pressed, set.base)
+      end
+
       itemList[#itemList + 1] = item
     end
   end
