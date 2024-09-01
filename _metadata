@@ -8,5 +8,5 @@
   "steamContentId" : "2957136802",
   "steamDescription" : "Restores & updates the original Quickbar Mini\n\nRequires [url=https://steamcommunity.com/sharedfiles/filedetails/?id=764887546]Stardust Core[/url] or [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2512589532]Stardust Core Lite[/url]\n\n[h1]the featureful:[/h1]\n- it';s The original quickbar!\n- Toggleable compact mode\n- Supports metaGUI panes\n- Updated conditions\n- Icons can be hidden\n- Can be opened with a keybind if you have StarExtensions or OpenStarbound installed\n\n[img]https://i.imgur.com/wXjYMqP.gif[/img]https://discord.gg/GdsQSgV\n[img]https://i.imgur.com/jJAj6jF.gif[/img]https://github.com/bongus-jive/classic-quickbar\n\n\nthis is kinda like a fork of Silverfeelin's 'Quickbar Mini'\nwhich is also kindve a fork of an old version of zetaPRIME's StardustLib\nso like, credit to them or whatever\n\nalso shoutout to the starpounds discord server because they're basically the main reason this mod exists lol",
   "tags" : "User Interface",
-  "version" : "1.0"
+  "version" : "1.1"
 }
