@@ -2,6 +2,6 @@
   {
     "op": "add",
     "path": "/settings/pat_classicqb",
-    "value": "/pat/classicquickbar/settings.lua"
+    "value": "/pat/classicquickbar/settings/mgui_settings.lua"
   }
 ]
