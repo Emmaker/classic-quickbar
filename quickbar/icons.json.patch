@@ -13,6 +13,7 @@
       }
     }
   ],
+  [ { "op": "test", "path": "/items/communityframework:changemode" }, { "op": "remove", "path": "/items/communityframework:changemode" } ],
   [
     { "op": "test", "path": "/items/metagui:settings/condition" },
     { "op": "move", "from": "/items/metagui:settings/condition", "path": "/__temp" }
