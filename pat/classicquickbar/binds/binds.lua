@@ -12,8 +12,8 @@ function init()
       openQuickbar()
     end
 
-    if mgui and input.bindDown("pat_classicquickbar", "settings") then
-      player.interact("ScriptPane", { gui = {}, scripts = { "/metagui.lua" }, config = "metagui:settings" })
+    if input.bindDown("pat_classicquickbar", "settings") then
+      player.interact("ScriptPane", {gui = {}, scripts = {"/metagui.lua"}, config = "metagui:settings", fallback = "/pat/classicquickbar/settings/settings.config"})
     end
   end
 end
