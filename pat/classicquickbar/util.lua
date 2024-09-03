@@ -1,5 +1,11 @@
 local shared = getmetatable''
 
+function isMetaguiAvailable()
+  local mgui = root.assetJson("/panes.config").metaGUI ~= nil
+  isMetaguiAvailable = function() return mgui end
+  return mgui
+end
+
 function getMetaguiSetting(key, default)
   local settings = player.getProperty("metagui:settings") or {}
   if not key then
@@ -42,31 +48,31 @@ local function translateLegacyItems(iconConfig, translation)
         label = (tr.prefix or "")..item.label,
         icon = item.icon,
         weight = tr.weight or 0,
-        action = translateLegacyAction(item),
-        condition = tr.condition
+        condition = tr.condition,
+        action = translateLegacyAction(item)
       }
     end
   end
 end
 
-local function getHiddenItems(itemTable)
+function getHiddenItems(itemTable)
   local hidden = getMetaguiSetting("pat_hiddenIcons", nil)
 
   if not hidden and itemTable then
-    hidden = { }
+    hidden = {}
     for k, item in pairs(itemTable) do
       hidden[k] = item.defaultHidden or nil
     end
   end
 
-  return hidden or { }
+  return hidden or {}
 end
 
 function getQuickbarItems(filter)
   local qbConfig = root.assetJson("/pat/classicquickbar/classicquickbar.json")
   local iconConfig = root.assetJson("/quickbar/icons.json")
   local hiddenItems = getHiddenItems(iconConfig.items)
-  local itemList = { }
+  local itemList = {}
 
   translateLegacyItems(iconConfig, qbConfig.legacyTranslation)
 
@@ -99,33 +105,41 @@ end
 
 
 function dismissStardustQB()
+  if not isMetaguiAvailable() then
+    return
+  end
+
   local ipc = shared.metagui_ipc
   if not ipc or not ipc.uniqueByPath then
     return
   end
 
   local mguiQuickbarPath = root.assetJson("/metagui/registry.json:panes.quickbar.quickbar")
-  if ipc.uniqueByPath[mguiQuickbarPath] then
-    ipc.uniqueByPath[mguiQuickbarPath]()
-    return true
-  end
+
+  return pcall(ipc.uniqueByPath[mguiQuickbarPath])
 end
 
 function dismissClassicQB()
-  if shared.pat_classicqb_dismiss then
-    shared.pat_classicqb_dismiss()
-    return true
-  end
+  return pcall(shared.pat_classicqb_dismiss)
 end
 
 function openStardustQB()
-  if dismissStardustQB() then
+  if not isMetaguiAvailable() or dismissStardustQB() then
     return
   end
   dismissClassicQB()
 
-  player.interact("ScriptPane", { gui = { }, scripts = { "/metagui.lua" }, config = "quickbar:quickbar" })
+  player.interact("ScriptPane", { gui = {}, scripts = { "/metagui.lua" }, config = "quickbar:quickbar" })
   return true
+end
+
+local function getClassicQb()
+  local qb = root.assetJson("/interface/scripted/mmupgrade/mmupgradegui.config")
+  local bg = qb.gui.background
+  bg.fileBody = bg.fileBody_buttonless or bg.fileBody
+
+  getClassicQb = function() return qb end
+  return qb
 end
 
 function openClassicQB()
@@ -134,20 +148,15 @@ function openClassicQB()
   end
   dismissStardustQB()
 
-  local qb = root.assetJson("/interface/scripted/mmupgrade/mmupgradegui.config")
-  local bg = qb.gui.background
-  bg.fileBody = bg.fileBody_buttonless or bg.fileBody
-  player.interact("ScriptPane", qb)
-
+  player.interact("ScriptPane", getClassicQb())
   return true
 end
 
 function openQuickbar()
-  if getMetaguiSetting("pat_classicEnabled", true) then
-    return openClassicQB()
-  else
+  if isMetaguiAvailable() and not getMetaguiSetting("pat_classicEnabled", true) then
     return openStardustQB()
   end
+  return openClassicQB()
 end
 
 function dismissQuickbar()
@@ -155,8 +164,5 @@ function dismissQuickbar()
 end
 
 function rebuildClassicQB()
-  if shared.pat_classicqb_rebuild then
-    shared.pat_classicqb_rebuild()
-    return true
-  end
+  return pcall(shared.pat_classicqb_rebuild)
 end

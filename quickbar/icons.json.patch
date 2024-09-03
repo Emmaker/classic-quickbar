@@ -14,12 +14,21 @@
     }
   ],
   [
+    { "op": "test", "path": "/items/metagui:settings/condition" },
+    { "op": "move", "from": "/items/metagui:settings/condition", "path": "/__temp" }
+  ],
+  [ { "op": "add", "path": "/items/metagui:settings/condition", "value": [ "all", [ "metaguiAvailable" ] ] } ],
+  [
+    { "op": "test", "path": "/__temp" },
+    { "op": "move", "from": "/__temp", "path": "/items/metagui:settings/condition/-" }
+  ],
+  [
     { "op": "add", "path": "/items/metagui:settings/label", "value": "^pat_stardust;Stardust Settings" },
     { "op": "add", "path": "/items/metagui:settings/weight", "value": -10001 },
     { "op": "add", "path": "/items/metagui:settings/unhideable", "value": true },
     {
       "op": "add",
-      "path": "/items/_stardustquickbar",
+      "path": "/items/classicqb:stardustqb",
       "value": {
         "label": "^pat_stardust;Stardust Quickbar",
         "icon": "/pat/classicquickbar/images/stardustbar.png",
@@ -27,7 +36,7 @@
         "dismissQuickbar": true,
         "defaultHidden": true,
         "action": [ "ui", "quickbar:quickbar" ],
-        "condition": [ "pat_classicQuickbar" ],
+        "condition": [ "all", [ "classicQuickbar" ], [ "metaguiAvailable" ] ],
         "settingsButton": {
           "caption": "Open",
           "action": [ "_openStardustQuickbar" ]
