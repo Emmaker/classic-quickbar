@@ -4,11 +4,14 @@ a fork of Silverfeelin's [standalone version of the Quickbar](https://github.com
 
 restores the original (non-metagui) Quickbar while supporting newer versions & features of Stardust Core (lite)
 
-### Stardust Core or Stardust Core Lite are required
+### Requires at least one of the following mods:
+  - [StardustCoreLite or StardustCore](https://github.com/zetaPRIME/sb.StardustSuite) (recommended)
+  - [Quickbar Mini](https://github.com/Silverfeelin/Starbound-Quickbar-Mini) (can't open metaGUI panes)
+  - [Community Framework](https://github.com/Emmaker/CommunityFramework) (can't open metaGUI panes unless StardustCore is also isntalled)
 
 ## features :
 - The original quickbar !
-- Can still open MetaGUI windows
+- Can open MetaGUI windows (if StardustCore is installed)
 - More conditions
 - Togglable compact mode
 - Icons can be hidden
