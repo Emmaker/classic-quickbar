@@ -23,7 +23,7 @@
   "colorTags": {
     "^essential;": "^#ffb133;",
     "^admin;": "^#bf7fff;",
-    "^pat_stardust;": "^#C6C4FF;"
+    "^classicqb;": "^#C6C4FF;"
   },
   "defaultImages": {
     "icon": "/items/currency/essence.png",

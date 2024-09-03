@@ -23,14 +23,14 @@
     { "op": "move", "from": "/__temp", "path": "/items/metagui:settings/condition/-" }
   ],
   [
-    { "op": "add", "path": "/items/metagui:settings/label", "value": "^pat_stardust;Stardust Settings" },
+    { "op": "add", "path": "/items/metagui:settings/label", "value": "^classicqb;Stardust Settings" },
     { "op": "add", "path": "/items/metagui:settings/weight", "value": -10001 },
     { "op": "add", "path": "/items/metagui:settings/unhideable", "value": true },
     {
       "op": "add",
       "path": "/items/classicqb:stardustqb",
       "value": {
-        "label": "^pat_stardust;Stardust Quickbar",
+        "label": "^classicqb;Stardust Quickbar",
         "icon": "/pat/classicquickbar/images/stardustbar.png",
         "weight": -10000,
         "dismissQuickbar": true,
