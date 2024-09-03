@@ -19,6 +19,9 @@ function getMetaguiSetting(key, default)
 end
 
 function setMetaguiSetting(key, value)
+  if type(key) == "table" then
+    return player.setProperty("metagui:settings", key)
+  end
   local settings = getMetaguiSetting()
   settings[key] = value
   player.setProperty("metagui:settings", settings)
