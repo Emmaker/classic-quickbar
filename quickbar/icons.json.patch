@@ -42,6 +42,18 @@
           "action": [ "_openStardustQuickbar" ]
         }
       }
+    },
+    {
+      "op": "add",
+      "path": "/items/classicqb:settings",
+      "value": {
+        "label": "^classicqb;Classic Quickbar Settings",
+        "icon": "/pat/classicquickbar/images/settings.png",
+        "weight": -10001,
+        "unhideable": true,
+        "action": [ "pane", "/pat/classicquickbar/settings/settings.config" ],
+        "condition": [ "all", [ "classicQuickbar" ], [ "not", "metaguiAvailable" ] ]
+      }
     }
   ]
 ]
