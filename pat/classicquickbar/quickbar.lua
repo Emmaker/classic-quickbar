@@ -80,7 +80,7 @@ end
 function buttonCallback(item)
   return function()
     if item.condition and not condition(table.unpack(item.condition)) then -- recheck condition on attempt
-      pane.playSound("/sfx/interface/clickon_error.ogg")
+      pane.playSound("/sfx/interface/nav_insufficient_fuel.ogg")
       buildList()
       return
     end 
