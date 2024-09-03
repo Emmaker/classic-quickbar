@@ -4,7 +4,7 @@ require "/pat/classicquickbar/util.lua"
 require "/pat/classicquickbar/conditions.lua"
 conditions = { ["not"] = conditions["not"], any = conditions.any, all = conditions.all }
 conditions.metaguiAvailable = function() return false end
-function requiresMgui(id, ...)
+function condition(id, ...)
   if conditions[id] then return conditions[id](...) end
   return true
 end
@@ -17,7 +17,7 @@ function init()
   self.strings, self.images = qbConfig.strings, qbConfig.images
   
   self.itemList, self.hiddenItems = getQuickbarItems(function(item)
-    return not item.unhideable and (not item.condition or requiresMgui(table.unpack(item.condition)))
+    return not item.unhideable and (not item.condition or condition(table.unpack(item.condition)))
   end)
 
   widget.registerMemberCallback("scrollArea.list", "click", toggleItem)
