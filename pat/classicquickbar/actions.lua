@@ -1,4 +1,5 @@
 require "/pat/classicquickbar/util.lua"
+
 actions = actions or {}
 qbActions = actions -- alias for compatibility
 
@@ -8,19 +9,18 @@ function action(id, ...)
   end
 end
 
-
 function actions.pane(cfg)
   if type(cfg) ~= "table" then cfg = { config = cfg } end
   player.interact(cfg.type or "ScriptPane", cfg.config)
 end
 
-function actions.ui(cfg, data) -- metaGUI windows
-  player.interact("ScriptPane", { gui = { }, scripts = {"/metagui.lua"}, config = cfg, data = data })
+function actions.ui(cfg, data, fallback)
+  player.interact("ScriptPane", { gui = {}, scripts = {"/metagui.lua"}, config = cfg, data = data, fallback = fallback })
 end
 
 function actions.exec(script, ...)
   if type(script) ~= "string" then return nil end
-  params = {...} -- pass any given parameters to the script
+  params = {...}
   _SBLOADED[script] = nil
   require(script)
   params = nil
@@ -28,7 +28,7 @@ end
 
 function actions._legacy_module(script, action)
   if type(script) ~= "string" or type(action) ~= "string" then return nil end
-  module = { }
+  module = {}
   _SBLOADED[script] = nil
   require(script)
   if module[action] then module[action]() end
