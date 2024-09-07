@@ -1,7 +1,7 @@
 require "/pat/classicquickbar/util.lua"
 
-actions = actions or {}
-qbActions = actions -- alias for compatibility
+local actions = _ENV.actions or {}
+_ENV.actions = actions
 
 function action(id, ...)
   if actions[id] then

@@ -1,5 +1,6 @@
 require "/pat/classicquickbar/util.lua"
 require "/pat/classicquickbar/actions.lua"
+qbActions = actions -- alias for compatibility
 
 local shared = getmetatable''
 
