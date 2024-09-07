@@ -22,6 +22,10 @@ local page = module:page({
         { type = "label", text = strings.enableClassic, expand = true }
       },
       {
+        { type = "checkBox", id = "leftQbCheckbox", checked = default(metagui.settings.pat_leftQuickbar, false) },
+        { type = "label", text = strings.enableLeft, expand = true }
+      },
+      {
         { type = "checkBox", id = "compactQbCheckbox", checked = default(metagui.settings.pat_compactQuickbar, false) },
         { type = "label", text = strings.enableCompact, expand = true }
       },
@@ -117,6 +121,7 @@ end
 function page:save()
   local s = metagui.settings
   s.pat_hiddenIcons = self.hiddenItems
+  s.pat_leftQuickbar = self.leftQbCheckbox.checked
   s.pat_compactQuickbar = self.compactQbCheckbox.checked
 
   local classicChecked = self.classicQbCheckbox.checked

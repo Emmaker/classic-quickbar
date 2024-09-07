@@ -108,6 +108,45 @@
             }
           }
         },
+        "left": {
+          "type": "list",
+          "scissoring": false,
+          "fillDown": true,
+          "schema": {
+            "spacing": [ 0, 0 ],
+            "memberSize": [ 132, 20 ],
+            "listTemplate": {
+              "label": {
+                "type": "label",
+                "position": [ 26, 11 ],
+                "hAnchor": "left",
+                "vAnchor": "mid",
+                "wrapWidth": 102,
+                "value": "Item Label"
+              },
+              "buttonContainer": {
+                "type": "list",
+                "position": [ 4, 2 ],
+                "scissoring": false,
+                "schema": {
+                  "spacing": [ 0, 0 ],
+                  "memberSize": [ 18, 18 ],
+                  "listTemplate": {
+                    "button": {
+                      "type": "button",
+                      "position": [ 0, 0 ],
+                      "pressedOffset": [ 0, 0 ],
+                      "base": "/sys/stardust/quickbar/button.idle.png",
+                      "hover": "/sys/stardust/quickbar/button.hover.png",
+                      "pressed": "/sys/stardust/quickbar/button.idle.png",
+                      "callback": "click"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
         "compact": {
           "type": "list",
           "scissoring": false,

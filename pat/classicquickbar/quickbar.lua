@@ -32,9 +32,8 @@ function uninit()
 end
 
 function buildList()
-  local compact = getMetaguiSetting("pat_compactQuickbar", false)
   local listWidgets = config.getParameter("listWidgets")
-  local listConfig = listWidgets[compact and "compact" or "default"]
+  local listConfig = listWidgets[getListMode()]
   widget.removeChild("scroll", "list")
   widget.addChild("scroll", listConfig, "list")
 
@@ -46,6 +45,18 @@ function buildList()
   for _, item in ipairs(itemList) do
     addQuickbarButton(item)
   end
+end
+
+function getListMode()
+  local settings = getMetaguiSetting()
+
+  if settings.pat_compactQuickbar then
+    return "compact"
+  elseif settings.pat_leftQuickbar then
+    return "left"
+  end
+  
+  return "default"
 end
 
 function filterItems(item)
