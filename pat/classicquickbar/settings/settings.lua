@@ -11,9 +11,12 @@ end
 
 function init()
   self.settingsConfig = root.assetJson("/pat/classicquickbar/classicquickbar.json:settings")
-
+  
+  local compact = getMetaguiSetting("pat_compactQuickbar", false)
   widget.setChecked("autoDismiss", getMetaguiSetting("quickbarAutoDismiss", false))
-  widget.setChecked("compactMode", getMetaguiSetting("pat_compactQuickbar", false))
+  widget.setChecked("compactMode", compact)
+  widget.setChecked("leftMode", getMetaguiSetting("pat_leftQuickbar", false))
+  widget.setButtonEnabled("leftMode", not compact)
   
   self.itemList, self.hiddenItems = getQuickbarItems(function(item)
     return not item.unhideable and (not item.condition or condition(table.unpack(item.condition)))
@@ -31,6 +34,7 @@ function apply()
   local settings = getMetaguiSetting()
   settings.quickbarAutoDismiss = widget.getChecked("autoDismiss")
   settings.pat_compactQuickbar = widget.getChecked("compactMode")
+  settings.pat_leftQuickbar = widget.getChecked("leftMode")
   settings.pat_hiddenIcons = self.hiddenItems
   setMetaguiSetting(settings)
   rebuildClassicQB()
@@ -38,7 +42,12 @@ end
 
 function enableApply() widget.setButtonEnabled("apply", true) end
 function toggleAutoDismiss() enableApply() end
-function toggleCompact() enableApply() end
+function toggleLeft() enableApply() end
+
+function toggleCompact()
+  enableApply()
+  widget.setButtonEnabled("leftMode", not widget.getChecked("compactMode"))
+end
 
 function toggleItem(_, item)
   enableApply()
