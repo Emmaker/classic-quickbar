@@ -35,12 +35,9 @@ function page:init()
   end
 
   function page.compactCheckbox:onClick()
-    if self.checked then page.leftCheckbox:setChecked(false) end
+    page:setLeftModeLabel(self.checked)
   end
-  
-  function page.leftCheckbox:onClick()
-    if self.checked then page.compactCheckbox:setChecked(false) end
-  end
+  self:setLeftModeLabel(self.compactCheckbox.checked)
 end
 
 function page:addListButton(item)
@@ -99,6 +96,11 @@ function page:save()
   end
 
   apply.color = nil
+end
+
+function page:setLeftModeLabel(b)
+  self.leftLabelOff:setVisible(b)
+  self.leftLabel:setVisible(not b)
 end
 
 function page.filterItems(item)
