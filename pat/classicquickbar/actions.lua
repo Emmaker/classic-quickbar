@@ -35,17 +35,8 @@ function actions._legacy_module(script, action)
   module = nil
 end
 
-function actions.sail()
-  player.interact("OpenAiInterface")
-end
-
 function actions.changeMode()
   local compact = getMetaguiSetting("pat_compactQuickbar", false)
   setMetaguiSetting("pat_compactQuickbar", not compact)
   rebuildClassicQB()
-end
-
-function actions.teleport(cfg)
-  if type(cfg) ~= "string" then return end
-  player.interact("OpenTeleportDialog", cfg)
 end

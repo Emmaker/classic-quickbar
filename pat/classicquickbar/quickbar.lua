@@ -1,13 +1,14 @@
 require "/pat/classicquickbar/util.lua"
-require "/pat/classicquickbar/actions.lua"
-qbActions = actions -- alias for compatibility
 
 local shared = getmetatable''
 
 function init()
   self.metaguiAvailable = isMetaguiAvailable()
-  if self.metaguiAvailable then require "/sys/quickbar/conditions.lua" end
+
+  loadConditionsAndActions()
   require "/pat/classicquickbar/conditions.lua"
+  require "/pat/classicquickbar/actions.lua"
+  qbActions = actions -- alias for compatibility
 
   conditions.classicQuickbar = function() return true end
   conditions.metaguiAvailable = function() return self.metaguiAvailable end
@@ -110,4 +111,17 @@ function createTooltip(screenPosition)
   local childAt = widget.getChildAt(screenPosition)
   if not childAt then return end
   return self.hoverTooltips[childAt]
+end
+
+function loadConditionsAndActions()
+  -- Stardust conditions
+  if self.metaguiAvailable then
+    pcall(require, "/sys/quickbar/conditions.lua")
+  end
+
+  -- Community Framework conditions & actions
+  if root.assetJson("/player.config:genericScriptContexts").cf_codex ~= nil then
+    pcall(require, "/quickbar/conditions.lua")
+    pcall(require, "/quickbar/actions.lua")
+  end
 end

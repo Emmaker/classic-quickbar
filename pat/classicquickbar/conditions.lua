@@ -1,4 +1,5 @@
-conditions = conditions or {}
+local conditions = _ENV.conditions or {}
+_ENV.conditions = conditions
 
 function condition(id, ...)
   if conditions[id] then
