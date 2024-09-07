@@ -10,11 +10,10 @@ function condition(id, ...)
 end
 
 function init()
+  self.settingsConfig = root.assetJson("/pat/classicquickbar/classicquickbar.json:settings")
+
   widget.setChecked("autoDismiss", getMetaguiSetting("quickbarAutoDismiss", false))
   widget.setChecked("compactMode", getMetaguiSetting("pat_compactQuickbar", false))
-
-  local qbConfig = root.assetJson("/pat/classicquickbar/classicquickbar.json:settings")
-  self.strings, self.images = qbConfig.strings, qbConfig.images
   
   self.itemList, self.hiddenItems = getQuickbarItems(function(item)
     return not item.unhideable and (not item.condition or condition(table.unpack(item.condition)))
@@ -49,8 +48,8 @@ function toggleItem(_, item)
 end
 
 function addListItem(item)
-  item.labelOff = string.format(self.strings.hideFormat, item.uncoloredLabel)
-  item.iconOff = string.format(self.images.hideDirectives, item.icon)
+  item.labelOff = string.format(self.settingsConfig.hideFormat, item.uncoloredLabel)
+  item.iconOff = string.format(self.settingsConfig.hideDirectives, item.icon)
   
   item.listItem = "scrollArea.list." .. widget.addListItem("scrollArea.list")
 
