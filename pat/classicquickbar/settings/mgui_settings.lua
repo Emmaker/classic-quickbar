@@ -1,8 +1,8 @@
 local page = pat_classicQuickbar
 
-require "/pat/classicquickbar/manager.lua"
-require "/pat/classicquickbar/builder.lua"
-require "/pat/classicquickbar/actions.lua"
+require "/pat/classicquickbar/modules/manager.lua"
+require "/pat/classicquickbar/modules/builder.lua"
+require "/pat/classicquickbar/modules/actions.lua"
 actions._openStardustQuickbar = qbManager.openStardust
 
 local function default(v, d)

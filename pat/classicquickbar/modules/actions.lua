@@ -1,4 +1,4 @@
-require "/pat/classicquickbar/util.lua"
+require "/pat/classicquickbar/modules/util.lua"
 
 local actions = _ENV.actions or {}
 _ENV.actions = actions

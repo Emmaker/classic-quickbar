@@ -4,7 +4,7 @@ function init()
     return
   end
 
-  require "/pat/classicquickbar/manager.lua"
+  require "/pat/classicquickbar/modules/manager.lua"
 
   function update(dt)
     if input.bindDown("pat_classicquickbar", "open") then

@@ -1,9 +1,9 @@
-require "/pat/classicquickbar/util.lua"
-require "/pat/classicquickbar/builder.lua"
-require "/pat/classicquickbar/manager.lua"
+require "/pat/classicquickbar/modules/util.lua"
+require "/pat/classicquickbar/modules/builder.lua"
+require "/pat/classicquickbar/modules/manager.lua"
 
 -- hide items with a "metaGuiAvailable" condition
-require "/pat/classicquickbar/conditions.lua"
+require "/pat/classicquickbar/modules/conditions.lua"
 conditions = { ["not"] = conditions["not"], any = conditions.any, all = conditions.all }
 conditions.metaguiAvailable = function() return false end
 function condition(id, ...)

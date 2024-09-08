@@ -1,4 +1,4 @@
-require "/pat/classicquickbar/util.lua"
+require "/pat/classicquickbar/modules/util.lua"
 
 local qbBuilder = {}
 _ENV.qbBuilder = qbBuilder

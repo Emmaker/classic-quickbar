@@ -1,6 +1,6 @@
-require "/pat/classicquickbar/util.lua"
-require "/pat/classicquickbar/manager.lua"
-require "/pat/classicquickbar/builder.lua"
+require "/pat/classicquickbar/modules/util.lua"
+require "/pat/classicquickbar/modules/manager.lua"
+require "/pat/classicquickbar/modules/builder.lua"
 
 local shared = getmetatable''
 
@@ -13,8 +13,8 @@ function init()
   end
 
   loadConditionsAndActions()
-  require "/pat/classicquickbar/conditions.lua"
-  require "/pat/classicquickbar/actions.lua"
+  require "/pat/classicquickbar/modules/conditions.lua"
+  require "/pat/classicquickbar/modules/actions.lua"
   qbActions = actions -- alias for compatibility
 
   conditions.classicQuickbar = function() return true end
