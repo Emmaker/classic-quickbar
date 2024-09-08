@@ -1,15 +1,9 @@
 local page = pat_classicQuickbar
 
-require "/pat/classicquickbar/util.lua"
-
-do
-  local a, b = action, actions
-  action, actions = nil, nil
-  require "/pat/classicquickbar/actions.lua"
-  page.runAction, page.actions = action, actions
-  action, actions = a, b
-end
-page.actions._openStardustQuickbar = openStardustQB
+require "/pat/classicquickbar/manager.lua"
+require "/pat/classicquickbar/builder.lua"
+require "/pat/classicquickbar/actions.lua"
+actions._openStardustQuickbar = qbManager.openStardust
 
 local function default(v, d)
   if v == nil then return d end
@@ -27,7 +21,7 @@ function page:init()
   self.compactCheckbox:setChecked(default(metagui.settings.pat_compactQuickbar, false))
   self.leftCheckbox:setChecked(default(metagui.settings.pat_leftQuickbar, false))
 
-  local itemList, hiddenItems = getQuickbarItems(self.filterItems)
+  local itemList, hiddenItems = qbBuilder.getItems(self.filterItems)
   self.hiddenItems = hiddenItems
 
   for _, item in ipairs(itemList) do
@@ -76,7 +70,7 @@ function page:addListButton(item)
     b:setText(item.settingsButton.caption)
     b:setVisible(true)
     function b:onClick()
-      page.runAction(table.unpack(item.settingsButton.action))
+      action(table.unpack(item.settingsButton.action))
     end
   end
 end
@@ -109,13 +103,13 @@ end
 
 function page.rebuildQbList()
   coroutine.yield()
-  rebuildClassicQB()
+  qbManager.rebuildClassic()
 end
 
 function page.reopenQb()
   coroutine.yield()
-  if dismissQuickbar() then
+  if qbManager.dismiss() then
     coroutine.yield()
-    openQuickbar()
+    qbManager.open()
   end
 end

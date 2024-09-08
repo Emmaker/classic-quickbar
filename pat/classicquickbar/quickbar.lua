@@ -1,9 +1,16 @@
 require "/pat/classicquickbar/util.lua"
+require "/pat/classicquickbar/manager.lua"
+require "/pat/classicquickbar/builder.lua"
 
 local shared = getmetatable''
 
 function init()
-  self.metaguiAvailable = isMetaguiAvailable()
+  self.metaguiAvailable = qbUtil.isMetaguiAvailable()
+  
+  if qbManager.dismiss()
+  or (self.metaguiAvailable and not qbUtil.getMetaguiSetting("pat_classicEnabled", true) and qbManager.openStardust()) then
+    return pane.dismiss()
+  end
 
   loadConditionsAndActions()
   require "/pat/classicquickbar/conditions.lua"
@@ -12,11 +19,6 @@ function init()
 
   conditions.classicQuickbar = function() return true end
   conditions.metaguiAvailable = function() return self.metaguiAvailable end
-  
-  if dismissClassicQB() or dismissStardustQB()
-  or (self.metaguiAvailable and not getMetaguiSetting("pat_classicEnabled", true) and openStardustQB()) then
-    return pane.dismiss()
-  end
 
   self.hoverTooltips = {}
   self.tooltipsEnabled = false
@@ -42,7 +44,7 @@ function buildList()
   self.tooltipsEnabled = listConfig.tooltips
   self.hoverTooltips = {}
 
-  local itemList = getQuickbarItems(filterItems)
+  local itemList = qbBuilder.getItems(filterItems)
   
   for _, item in ipairs(itemList) do
     addQuickbarButton(item)
@@ -50,7 +52,7 @@ function buildList()
 end
 
 function getListMode()
-  local settings = getMetaguiSetting()
+  local settings = qbUtil.getMetaguiSetting()
 
   if settings.pat_compactQuickbar then
     return "compact"
@@ -100,7 +102,7 @@ function buttonCallback(item)
 
     action(table.unpack(item.action))
 
-    if item.dismissQuickbar or (not item.blockAutoDismiss and getMetaguiSetting("quickbarAutoDismiss", false)) then
+    if item.dismissQuickbar or (not item.blockAutoDismiss and qbUtil.getMetaguiSetting("quickbarAutoDismiss", false)) then
       pane.dismiss()
     end
   end

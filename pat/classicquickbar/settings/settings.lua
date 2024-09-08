@@ -1,4 +1,6 @@
 require "/pat/classicquickbar/util.lua"
+require "/pat/classicquickbar/builder.lua"
+require "/pat/classicquickbar/manager.lua"
 
 -- hide items with a "metaGuiAvailable" condition
 require "/pat/classicquickbar/conditions.lua"
@@ -12,13 +14,13 @@ end
 function init()
   self.settingsConfig = root.assetJson("/pat/classicquickbar/classicquickbar.json:settings")
   
-  local compact = getMetaguiSetting("pat_compactQuickbar", false)
-  widget.setChecked("autoDismiss", getMetaguiSetting("quickbarAutoDismiss", false))
+  local compact = qbUtil.getMetaguiSetting("pat_compactQuickbar", false)
   widget.setChecked("compactMode", compact)
-  widget.setChecked("leftMode", getMetaguiSetting("pat_leftQuickbar", false))
   widget.setButtonEnabled("leftMode", not compact)
+  widget.setChecked("leftMode", qbUtil.getMetaguiSetting("pat_leftQuickbar", false))
+  widget.setChecked("autoDismiss", qbUtil.getMetaguiSetting("quickbarAutoDismiss", false))
   
-  self.itemList, self.hiddenItems = getQuickbarItems(function(item)
+  self.itemList, self.hiddenItems = qbBuilder.getItems(function(item)
     return not item.unhideable and (not item.condition or condition(table.unpack(item.condition)))
   end)
 
@@ -31,13 +33,13 @@ end
 function apply()
   widget.setButtonEnabled("apply", false)
 
-  local settings = getMetaguiSetting()
+  local settings = qbUtil.getMetaguiSetting()
   settings.quickbarAutoDismiss = widget.getChecked("autoDismiss")
   settings.pat_compactQuickbar = widget.getChecked("compactMode")
   settings.pat_leftQuickbar = widget.getChecked("leftMode")
   settings.pat_hiddenIcons = self.hiddenItems
-  setMetaguiSetting(settings)
-  rebuildClassicQB()
+  qbUtil.setMetaguiSetting(settings)
+  qbManager.rebuildClassic()
 end
 
 function enableApply() widget.setButtonEnabled("apply", true) end

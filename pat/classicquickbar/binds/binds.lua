@@ -4,12 +4,11 @@ function init()
     return
   end
 
-  require "/pat/classicquickbar/util.lua"
-  local mgui = isMetaguiAvailable()
+  require "/pat/classicquickbar/manager.lua"
 
   function update(dt)
     if input.bindDown("pat_classicquickbar", "open") then
-      openQuickbar()
+      qbManager.open()
     end
 
     if input.bindDown("pat_classicquickbar", "settings") then

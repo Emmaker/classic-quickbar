@@ -36,7 +36,7 @@ function actions._legacy_module(script, action)
 end
 
 function actions.changeMode()
-  local compact = getMetaguiSetting("pat_compactQuickbar", false)
-  setMetaguiSetting("pat_compactQuickbar", not compact)
-  rebuildClassicQB()
+  local compact = qbUtil.getMetaguiSetting("pat_compactQuickbar", false)
+  qbUtil.setMetaguiSetting("pat_compactQuickbar", not compact)
+  qbManager.rebuildClassic()
 end
