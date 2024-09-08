@@ -80,7 +80,9 @@ function addQuickbarButton(item)
   widget.setButtonOverlayImage(button, item.icon)
 
   if item.buttonImages then
+    local size = widget.getSize(button)
     widget.setButtonImages(button, item.buttonImages)
+    widget.setSize(button, size)
   end
 
   self.hoverTooltips["." .. button] = string.format(" %s ", item.label)

@@ -6,6 +6,7 @@
   [
     { "op": "add", "path": "/pat_classicQuickbar", "value": true },
     { "op": "add", "path": "/scripts", "value": [ "/pat/classicquickbar/quickbar.lua" ] },
+    { "op": "add", "path": "/scriptWidgetCallbacks", "value": [ ] },
     {
       "op": "add",
       "path": "/gui",
@@ -18,7 +19,7 @@
           "positionLocked": true
         },
         "background": {
-          "zlevel": 0,
+          "zlevel": -100,
           "type": "background",
           "fileBody": "/sys/stardust/quickbar/quickbar.bg.png",
           "fileBody_buttonless": "/pat/classicquickbar/images/body_buttonless.png"
