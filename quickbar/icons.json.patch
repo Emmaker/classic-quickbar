@@ -18,7 +18,7 @@
     { "op": "test", "path": "/items/metagui:settings/condition" },
     { "op": "move", "from": "/items/metagui:settings/condition", "path": "/__temp" }
   ],
-  [ { "op": "add", "path": "/items/metagui:settings/condition", "value": [ "all", [ "metaguiAvailable" ] ] } ],
+  [ { "op": "add", "path": "/items/metagui:settings/condition", "value": [ "all", [ "any", [ "metaguiAvailable" ], [ "not", [ "classicQuickbar" ] ] ] ] } ],
   [
     { "op": "test", "path": "/__temp" },
     { "op": "move", "from": "/__temp", "path": "/items/metagui:settings/condition/-" }
