@@ -12,16 +12,10 @@ function init()
     return pane.dismiss()
   end
 
-  loadConditionsAndActions()
-  require "/pat/classicquickbar/modules/conditions.lua"
-  require "/pat/classicquickbar/modules/actions.lua"
-  qbActions = actions -- alias for compatibility
-
-  conditions.classicQuickbar = function() return true end
-  conditions.metaguiAvailable = function() return self.metaguiAvailable end
-
   self.hoverTooltips = {}
   self.tooltipsEnabled = false
+
+  loadConditionsAndActions()
   
   buildList()
   
@@ -126,4 +120,11 @@ function loadConditionsAndActions()
     pcall(require, "/quickbar/conditions.lua")
     pcall(require, "/quickbar/actions.lua")
   end
+
+  require "/pat/classicquickbar/modules/conditions.lua"
+  require "/pat/classicquickbar/modules/actions.lua"
+  qbActions = actions -- alias for compatibility
+
+  conditions.classicQuickbar = function() return true end
+  conditions.metaguiAvailable = function() return self.metaguiAvailable end
 end
