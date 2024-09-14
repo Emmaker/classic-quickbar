@@ -31,6 +31,11 @@ function qbManager.openClassic()
   end
   qbManager.dismissStardust()
 
+  if interface and interface.displayRegisteredPane then
+    interface.displayRegisteredPane("MmUpgrade")
+    return true
+  end
+
   player.interact("ScriptPane", getClassic())
   return true
 end
