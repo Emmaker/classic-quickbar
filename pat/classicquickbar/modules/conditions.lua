@@ -60,7 +60,7 @@ function conditions.hasTaggedItem(tag, count)
 end
 
 function conditions.configExists(key)
-  return root.assetJson(key) ~= nil
+  return pcall(root.assetJson, key)
 end
 
 function conditions.techExists(name)
